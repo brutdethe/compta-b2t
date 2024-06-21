@@ -2,8 +2,8 @@
 
 ## US1 Construire le journal général
 
-- [] faire un affichage minimaliste
-- [] lire un fichier csv
+- [x] faire un affichage minimaliste
+- [x] lire un fichier csv
 - [] à partir d'une ligne d'achat générer les écritures du livre
   - 600 charge C
   - 401 fournisseur D
