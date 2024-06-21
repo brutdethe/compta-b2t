@@ -1,0 +1,19 @@
+# Backlog
+
+## US1 Construire le journal général
+
+- [] faire un affichage minimaliste
+- [] lire un fichier csv
+- [] à partir d'une ligne d'achat générer les écritures du livre
+  - 600 charge C
+  - 401 fournisseur D
+  - 4551 associé D
+  - 401 fournisseur C
+- [] à partir d'une ligne de remboursement générer les écritures du livre
+  - 4551 associé C
+  - 512 banque D
+- [] à partir d'une ligne de vente générer les écritures du livre
+  - 700 vente D
+  - 411 client C
+  - 411 client D
+  - 512 banque C
