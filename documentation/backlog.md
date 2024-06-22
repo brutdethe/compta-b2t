@@ -4,7 +4,7 @@
 
 - [x] faire un affichage minimaliste
 - [x] lire un fichier csv
-- [] à partir d'une ligne d'achat générer les écritures du livre
+- [x] à partir d'une ligne d'achat générer les écritures du livre
   - 600 charge C
   - 401 fournisseur D
   - 4551 associé D

@@ -31,8 +31,63 @@ function parseCSV(csv) {
         data.push(rowObject)
     }
 
-    const jsonData = JSON.stringify(data, null, 2)
-    return jsonData
+    return data
+}
+
+function lineToEntry(line) {
+    const chartOfAccounts = {
+        'location': '613000'
+    }
+    const entries = []
+
+    entries.push({
+        'Date': line['date'],
+        'Numéro de compte': chartOfAccounts[line['poste']],
+        'Libellé': line['poste'],
+        'Débit (€)': line['montant'],
+        'Crédit (€)': ''
+    })
+
+    entries.push({
+        'Date': line['date'],
+        'Numéro de compte': '401000',
+        'Libellé': 'fournisseurs',
+        'Débit (€)': '',
+        'Crédit (€)': line['montant']
+    })
+
+    entries.push({
+        'Date': line['date'],
+        'Numéro de compte': '512000',
+        'Libellé': 'banque',
+        'Débit (€)': '',
+        'Crédit (€)': line['montant']
+    })
+
+    entries.push({
+        'Date': line['date'],
+        'Numéro de compte': '401000',
+        'Libellé': 'fournisseurs',
+        'Débit (€)': line['montant'],
+        'Crédit (€)': ''
+    })
+
+    return entries
+}
+
+function injectEntriesIntoTable(entries) {
+    const tableBody = document.getElementById('journal-entries');
+    entries.forEach(entry => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${entry['Date']}</td>
+            <td>${entry['Numéro de compte']}</td>
+            <td>${entry['Libellé']}</td>
+            <td>${entry['Débit (€)']}</td>
+            <td>${entry['Crédit (€)']}</td>
+        `;
+        tableBody.appendChild(row);
+    });
 }
 
 
@@ -47,7 +102,7 @@ fetch(url)
     })
     .then(csvData => {
         const jsonOutput = parseCSV(csvData)
-
-        console.log(jsonOutput)
+        const allEntries = jsonOutput.flatMap(line => lineToEntry(line))
+        injectEntriesIntoTable(allEntries)
     })
     .catch(error => console.error('Erreur lors du chargement du fichier CSV :', error))
