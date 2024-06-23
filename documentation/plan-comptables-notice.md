@@ -2,8 +2,12 @@
     - caution loyer
 401 - fournisseurs
     - tous les fournisseurs
+411 - clients
+    - adhérentes, clientes
 467 - autres comptes débiteurs ou créditeurs
     - ensemble des frais des personnes dirigeantes
+512 - banques
+    - wise
 606 - achats non stockés de matière et fournitures
     - gaz, crayons, colles, scotch
 607 - achats de marchandises

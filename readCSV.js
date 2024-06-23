@@ -2,7 +2,9 @@ function getNumberOfChartOfAccounts(title) {
     const chartOfAccounts = {
         "dépôts et cautionnements versés": "275000",
         "fournisseurs": "401000",
+        "clients": "411000",
         "autres comptes débiteurs ou créditeurs": "467000",
+        "banques": "512000",
         "achats non stockés de matière et fournitures": "606000",
         "achats de marchandises": "607000",
         "locations": "613000",
@@ -65,18 +67,53 @@ function chargeEntry(line) {
         },
         {
             'Date': line['date'],
-            'Compte': '467000',
+            'Compte': '401000',
+            'Pièce': line['Facture correspondante'] && `<a href="${line['Facture correspondante']}">facture</a>`,
+            'Débit (€)': line['montant'],
+            'Crédit (€)': ''
+        },
+        {
+            'Date': line['date'],
+            'Compte': line['qui paye ?'] === 'B2T' ? '512000' : '467000',
+            'Pièce': '',
+            'Débit (€)': '',
+            'Crédit (€)': line['montant']
+        }
+    ];
+
+    return entries;
+}
+
+
+function saleEntry(line) {
+    const entries = [{
+            'Date': line['date'],
+            'Compte': getNumberOfChartOfAccounts(line['poste']),
             'Pièce': '',
             'Débit (€)': '',
             'Crédit (€)': line['montant']
         },
         {
             'Date': line['date'],
-            'Compte': '401000',
-            'Pièce': line['Facture correspondante'] && `<a href="${line['Facture correspondante']}">facture</a>`,
+            'Compte': '411000',
+            'Pièce': line['Facture correspondante'],
             'Débit (€)': line['montant'],
             'Crédit (€)': ''
-        }
+        },
+        {
+            'Date': line['date'],
+            'Compte': '411000',
+            'Pièce': line['Facture correspondante'],
+            'Débit (€)': '',
+            'Crédit (€)': line['montant']
+        },
+        {
+            'Date': line['date'],
+            'Compte': '512000',
+            'Pièce': '',
+            'Débit (€)': line['montant'],
+            'Crédit (€)': ''
+        },
     ];
 
     return entries;
@@ -86,6 +123,9 @@ function lineToEntry(line) {
     const accountNumber = getNumberOfChartOfAccounts(line['poste']);
     if (accountNumber.startsWith('6')) {
         return chargeEntry(line);
+    }
+    if (accountNumber.startsWith('7')) {
+        return saleEntry(line);
     }
 
     throw new Error(`L'écriture ${JSON.stringify(line)} n'a pu être rendue !`);
