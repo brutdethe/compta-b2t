@@ -42,32 +42,32 @@ function lineToEntry(line) {
 
     entries.push({
         'Date': line['date'],
-        'Numéro de compte': chartOfAccounts[line['poste']],
-        'Libellé': line['poste'],
+        'Compte': chartOfAccounts[line['poste']],
+        'Pièce': '',
         'Débit (€)': line['montant'],
         'Crédit (€)': ''
     })
 
     entries.push({
         'Date': line['date'],
-        'Numéro de compte': '401000',
-        'Libellé': 'fournisseurs',
+        'Compte': '401000',
+        'Pièce': '<a href="' + line['Facture correspondante'] + '">facture</a>',
         'Débit (€)': '',
         'Crédit (€)': line['montant']
     })
 
     entries.push({
         'Date': line['date'],
-        'Numéro de compte': '512000',
-        'Libellé': 'banque',
+        'Compte': '512000',
+        'Pièce': '',
         'Débit (€)': '',
         'Crédit (€)': line['montant']
     })
 
     entries.push({
         'Date': line['date'],
-        'Numéro de compte': '401000',
-        'Libellé': 'fournisseurs',
+        'Compte': '401000',
+        'Pièce': '<a href="' + line['Facture correspondante'] + '">facture</a>',
         'Débit (€)': line['montant'],
         'Crédit (€)': ''
     })
@@ -81,8 +81,8 @@ function injectEntriesIntoTable(entries) {
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${entry['Date']}</td>
-            <td>${entry['Numéro de compte']}</td>
-            <td>${entry['Libellé']}</td>
+            <td>${entry['Compte']}</td>
+            <td>${entry['Pièce']}</td>
             <td>${entry['Débit (€)']}</td>
             <td>${entry['Crédit (€)']}</td>
         `;
