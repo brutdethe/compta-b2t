@@ -2,8 +2,8 @@
 
 ## US2 Construire le grand live
 - [x] gérer les pages
-- [] stocker les écritures du journal quelques part
-- [] réinjecter le journal
+- [x] séparer la fabrication des écritures du journal
+- [x] réinjecter le journal
 - [] afficher un compte avec ses opérations
 - [] calculer un compte
 - [] afficher tous les compte
