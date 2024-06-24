@@ -22,7 +22,7 @@ function getNumberOfChartOfAccounts(title) {
 function parseCSV(csv) {
     const [headerLine, ...lines] = csv.trim().split(/\r?\n/);
     const headers = headerLine.split(',').map(header => header.trim());
-    const data = lines.map(line => {
+    return lines.map(line => {
         const rowData = [];
         let insideQuotes = false;
         let field = '';
@@ -31,132 +31,57 @@ function parseCSV(csv) {
             if (char === '"') {
                 insideQuotes = !insideQuotes;
             } else if (char === ',' && !insideQuotes) {
-                rowData.push(field);
+                rowData.push(field.trim().replace(/"/g, ''));
                 field = '';
             } else {
                 field += char;
             }
         }
+        rowData.push(field.trim().replace(/"/g, ''));
 
-        rowData.push(field);
-        const rowObject = {};
-        headers.forEach((header, index) => {
-            rowObject[header] = rowData[index] ? rowData[index].trim().replace(/"/g, '') : '';
-        });
-
-        return rowObject;
+        return headers.reduce((obj, header, index) => {
+            obj[header] = rowData[index] || '';
+            return obj;
+        }, {});
     });
+}
 
-    return data;
+function createEntry(date, account, piece, debit, credit) {
+    return { 'Date': date, 'Compte': account, 'Pièce': piece || '', 'Débit (€)': debit || '', 'Crédit (€)': credit || '' };
 }
 
 function refundEntry(line) {
-    const entries = [{
-            'Date': line['date'],
-            'Compte': '407000',
-            'Pièce': line['qui reçoit'],
-            'Débit (€)': line['montant'],
-            'Crédit (€)': ''
-        },
-        {
-            'Date': line['date'],
-            'Compte': '512000',
-            'Pièce': '',
-            'Débit (€)': '',
-            'Crédit (€)': line['montant']
-        }
+    return [
+        createEntry(line['date'], '407000', line['qui reçoit'], line['montant'], ''),
+        createEntry(line['date'], '512000', '', '', line['montant'])
     ];
-
-    return entries;
 }
 
 function chargeB2TEntry(line) {
-    const entries = [{
-            'Date': line['date'],
-            'Compte': getNumberOfChartOfAccounts(line['poste']),
-            'Pièce': '',
-            'Débit (€)': line['montant'],
-            'Crédit (€)': ''
-        },
-        {
-            'Date': line['date'],
-            'Compte': '401000',
-            'Pièce': line['Facture correspondante'] && `<a href="${line['Facture correspondante']}">facture</a>`,
-            'Débit (€)': '',
-            'Crédit (€)': line['montant']
-        },
-        {
-            'Date': line['date'],
-            'Compte': '401000',
-            'Pièce': line['Facture correspondante'] && `<a href="${line['Facture correspondante']}">facture</a>`,
-            'Débit (€)': line['montant'],
-            'Crédit (€)': ''
-        },
-        {
-            'Date': line['date'],
-            'Compte': '512000',
-            'Pièce': '',
-            'Débit (€)': '',
-            'Crédit (€)': line['montant']
-        }
+    const piece = line['Facture correspondante'] ? `<a href="${line['Facture correspondante']}">facture</a>` : '';
+    return [
+        createEntry(line['date'], getNumberOfChartOfAccounts(line['poste']), '', line['montant'], ''),
+        createEntry(line['date'], '401000', piece, '', line['montant']),
+        createEntry(line['date'], '401000', piece, line['montant'], ''),
+        createEntry(line['date'], '512000', '', '', line['montant'])
     ];
-
-    return entries;
 }
 
 function chargePersonEntry(line) {
-    const entries = [{
-            'Date': line['date'],
-            'Compte': getNumberOfChartOfAccounts(line['poste']),
-            'Pièce': '',
-            'Débit (€)': line['montant'],
-            'Crédit (€)': ''
-        },
-        {
-            'Date': line['date'],
-            'Compte': '407000',
-            'Pièce': line['Facture correspondante'] && `<a href="${line['Facture correspondante']}">facture</a>`,
-            'Débit (€)': '',
-            'Crédit (€)': line['montant']
-        }
+    const piece = line['Facture correspondante'] ? `<a href="${line['Facture correspondante']}">facture</a>` : '';
+    return [
+        createEntry(line['date'], getNumberOfChartOfAccounts(line['poste']), '', line['montant'], ''),
+        createEntry(line['date'], '407000', piece, '', line['montant'])
     ];
-
-    return entries;
 }
 
-
 function saleEntry(line) {
-    const entries = [{
-            'Date': line['date'],
-            'Compte': getNumberOfChartOfAccounts(line['poste']),
-            'Pièce': '',
-            'Débit (€)': '',
-            'Crédit (€)': line['montant']
-        },
-        {
-            'Date': line['date'],
-            'Compte': '411000',
-            'Pièce': line['Facture correspondante'],
-            'Débit (€)': line['montant'],
-            'Crédit (€)': ''
-        },
-        {
-            'Date': line['date'],
-            'Compte': '411000',
-            'Pièce': line['Facture correspondante'],
-            'Débit (€)': '',
-            'Crédit (€)': line['montant']
-        },
-        {
-            'Date': line['date'],
-            'Compte': '512000',
-            'Pièce': '',
-            'Débit (€)': line['montant'],
-            'Crédit (€)': ''
-        },
+    return [
+        createEntry(line['date'], getNumberOfChartOfAccounts(line['poste']), '', '', line['montant']),
+        createEntry(line['date'], '411000', line['Facture correspondante'], line['montant'], ''),
+        createEntry(line['date'], '411000', line['Facture correspondante'], '', line['montant']),
+        createEntry(line['date'], '512000', '', line['montant'], '')
     ];
-
-    return entries;
 }
 
 function lineToEntry(line) {
