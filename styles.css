@@ -2,11 +2,46 @@ body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
     margin: 20px;
+    background-color: #f4f4f4;
 }
 
-.journal {
+.container {
     max-width: 800px;
     margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    background: #ddd;
+    padding: 5px 10px;
+    border-radius: 3px;
+    transition: background 0.3s;
+}
+
+nav ul li a:hover {
+    background: #bbb;
+}
+
+.journal,
+.ledger {
+    max-width: 800px;
+    margin: 20px auto;
     padding: 20px;
     background: #f9f9f9;
     border: 1px solid #ccc;
