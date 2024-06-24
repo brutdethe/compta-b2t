@@ -11,7 +11,7 @@ fetch('001_compta-b2t.csv')
     })
     .then(csvText => {
         const jsonData = parseCSV(csvText);
-        // const ledgerData = generateLedger(jsonData);
+        const ledgerData = generateLedger(jsonData);
 
         if (document.getElementById('journal-entries')) {
             const journalEntries = jsonData.flatMap(line => lineToEntry(line));
@@ -19,7 +19,7 @@ fetch('001_compta-b2t.csv')
         }
 
         if (document.getElementById('ledger-entries')) {
-            // injectLedgerEntries(ledgerData);
+            injectLedgerEntries(ledgerData);
         }
     })
     .catch(error => {

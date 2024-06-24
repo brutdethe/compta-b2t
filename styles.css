@@ -69,6 +69,11 @@ table td {
     background-color: #fff;
 }
 
+table tr.sold,
+table tr.total {
+    font-weight: bold;
+}
+
 h1 {
     text-align: center;
     margin-bottom: 20px;
