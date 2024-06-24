@@ -50,7 +50,27 @@ function parseCSV(csv) {
     return data;
 }
 
-function chargeEntry(line) {
+function refundEntry(line) {
+    const entries = [{
+            'Date': line['date'],
+            'Compte': '407000',
+            'Pièce': line['qui reçoit'],
+            'Débit (€)': line['montant'],
+            'Crédit (€)': ''
+        },
+        {
+            'Date': line['date'],
+            'Compte': '512000',
+            'Pièce': '',
+            'Débit (€)': '',
+            'Crédit (€)': line['montant']
+        }
+    ];
+
+    return entries;
+}
+
+function chargeB2TEntry(line) {
     const entries = [{
             'Date': line['date'],
             'Compte': getNumberOfChartOfAccounts(line['poste']),
@@ -74,8 +94,28 @@ function chargeEntry(line) {
         },
         {
             'Date': line['date'],
-            'Compte': line['qui paye ?'] === 'B2T' ? '512000' : '467000',
+            'Compte': '512000',
             'Pièce': '',
+            'Débit (€)': '',
+            'Crédit (€)': line['montant']
+        }
+    ];
+
+    return entries;
+}
+
+function chargePersonEntry(line) {
+    const entries = [{
+            'Date': line['date'],
+            'Compte': getNumberOfChartOfAccounts(line['poste']),
+            'Pièce': '',
+            'Débit (€)': line['montant'],
+            'Crédit (€)': ''
+        },
+        {
+            'Date': line['date'],
+            'Compte': '407000',
+            'Pièce': line['Facture correspondante'] && `<a href="${line['Facture correspondante']}">facture</a>`,
             'Débit (€)': '',
             'Crédit (€)': line['montant']
         }
@@ -121,8 +161,15 @@ function saleEntry(line) {
 
 function lineToEntry(line) {
     const accountNumber = getNumberOfChartOfAccounts(line['poste']);
+    if (accountNumber.startsWith('4')) {
+        return refundEntry(line);
+    }
     if (accountNumber.startsWith('6')) {
-        return chargeEntry(line);
+        if (line['qui paye ?'] === 'B2T') {
+            return chargeB2TEntry(line);
+        } else {
+            return chargePersonEntry(line);
+        }
     }
     if (accountNumber.startsWith('7')) {
         return saleEntry(line);

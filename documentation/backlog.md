@@ -14,10 +14,9 @@
   - 411 client C
   - 411 client D
   - 512 banque C
-- [] à partir d'une ligne de remboursement générer les écritures du livre
+- [x] à partir d'une ligne de remboursement générer les écritures du livre
   - 467 associé C
   - 512 banque D
-
 
 #### Notes
 

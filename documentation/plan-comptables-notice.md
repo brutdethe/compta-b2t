@@ -1,5 +1,5 @@
 275 - dépôts et cautionnements versés
-    - caution loyer
+    - caution du loyer
 401 - fournisseurs
     - tous les fournisseurs
 411 - clients
@@ -15,17 +15,14 @@
 613 - locations
     - loyer
 625 - déplacements, missions et réceptions
-     - gites, festival
+     - gites, dépenses festival
 626 - frais postaux et de télécommunications
     - serveur web, adsl, timbres, enveloppes, cartons, téléphone
-
 706 - prestations de services
     - formations, cérémonies
 707 - ventes de marchandises
     - thés, théiers, cacao, céramiques, cahiers, plaids, bougies, kumquat, pates à tartiner 
-
 7541 - dons manuels
-
 756 - cotisations
 
 
