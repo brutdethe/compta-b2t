@@ -32,7 +32,15 @@ function convertToNumber(euroString) {
     return parseFloat(cleanString || 0);
 }
 
+function formatToCurrency(number) {
+    if (typeof number === 'number') {
+        return number
+            .toFixed(2)
+            .replace('.', ',') + ' €';
+    }
 
+    return number;
+}
 
 function createEntry(date, account, piece, debit, credit) {
     return { 'Date': date, 'Compte': account, 'Pièce': piece || '', 'Débit (€)': debit || '', 'Crédit (€)': credit || '' };
@@ -110,8 +118,8 @@ export function generateLedger(journalEntries) {
                 }
             });
 
-        ledgerEntries[account].push({ Date: "31/12/2021", Libellé: "Total", "Débit (€)": total.debit, "Crédit (€)": total.credit })
-        ledgerEntries[account].push({ Date: "31/12/2021", Libellé: "Solde", "Débit (€)": total.debit > total.credit ? total.debit - total.credit : "", "Crédit (€)": total.debit < total.credit ? total.credit - total.debit : "" })
+        ledgerEntries[account].push({ Date: "31/12/2021", Libellé: "Total", "Débit (€)": formatToCurrency(total.debit), "Crédit (€)": formatToCurrency(total.credit) })
+        ledgerEntries[account].push({ Date: "31/12/2021", Libellé: "Solde", "Débit (€)": formatToCurrency(total.debit > total.credit ? total.debit - total.credit : ""), "Crédit (€)": formatToCurrency(total.debit < total.credit ? total.credit - total.debit : "") })
     })
 
     return ledgerEntries;
