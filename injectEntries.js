@@ -36,7 +36,7 @@ export function injectLedgerEntries(ledgerEntries) {
                     </thead>
                     <tbody>
                     ${entries.map(entry => `
-                        <tr class="${entry['Libellé'] === "Total" && "total"}">
+                        <tr class="${(entry['Libellé'] === "Total" && "total") || (entry['Libellé'] === "Solde" && "sold")}">
                             <td>${entry['Date']}</td>
                             <td>${entry['Libellé']}</td>
                             <td>${entry['Débit (€)']}</td>
