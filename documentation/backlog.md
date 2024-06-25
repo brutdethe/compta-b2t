@@ -6,10 +6,15 @@
 - [x] réinjecter le journal
 - [x] fabriquer les données
 - [x] calculer un compte
-- [] afficher tous les compte
+- [x] afficher tous les compte
 - [] gérer les labels
 
 #### Notes
+- les comptes calculer
+- l'intitulé des comptes
+- nettoyer
+- parse solde prix
+
 - stripe écritures
 - immobilisations machine
 - gérer la caisse
