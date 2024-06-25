@@ -108,9 +108,11 @@ export function generateLedger(journalEntries) {
                     "Débit (€)": entry["Débit (€)"],
                     "Crédit (€)": entry["Crédit (€)"],
                 }
-            })
+            });
 
         ledgerEntries[account].push([{ Date: "31/12/2021", Libellé: "Total", "Débit (€)": total.debit, "Crédit (€)": total.credit }])
         ledgerEntries[account].push([{ Date: "31/12/2021", Libellé: "Solde", "Débit (€)": total.debit > total.credit ? total.debit : "", "Crédit (€)": total.debit < total.credit ? total.credit : "" }])
     })
+
+    return ledgerEntries;
 }
