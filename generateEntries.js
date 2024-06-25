@@ -42,41 +42,41 @@ function formatToCurrency(number) {
     return number;
 }
 
-function createEntry(date, account, piece, debit, credit) {
-    return { 'Date': date, 'Compte': account, 'Pièce': piece || '', 'Débit (€)': debit || '', 'Crédit (€)': credit || '' };
+function createEntry(date, account, receiver, piece, debit, credit) {
+    return { 'Date': date, 'Compte': account, 'Libellé': receiver, 'Pièce': piece || '', 'Débit (€)': debit || '', 'Crédit (€)': credit || '' };
 }
 
 function refundEntry(line) {
     return [
-        createEntry(line['date'], '467000', line['qui reçoit'], line['montant'], ''),
-        createEntry(line['date'], '512000', '', '', line['montant'])
+        createEntry(line['date'], '467000', line['qui reçoit'], line['qui reçoit'], line['montant'], ''),
+        createEntry(line['date'], '512000', line['qui reçoit'], '', '', line['montant'])
     ];
 }
 
 function chargeB2TEntry(line) {
     const piece = line['Facture correspondante'] ? `<a href="${line['Facture correspondante']}">facture</a>` : '';
     return [
-        createEntry(line['date'], findChartOfAccounts({ label: line['poste'] }).account, '', line['montant'], ''),
-        createEntry(line['date'], '401000', piece, '', line['montant']),
-        createEntry(line['date'], '401000', piece, line['montant'], ''),
-        createEntry(line['date'], '512000', '', '', line['montant'])
+        createEntry(line['date'], findChartOfAccounts({ label: line['poste'] }).account, line['qui reçoit'], '', line['montant'], ''),
+        createEntry(line['date'], '401000', line['qui reçoit'], piece, '', line['montant']),
+        createEntry(line['date'], '401000', line['qui reçoit'], piece, line['montant'], ''),
+        createEntry(line['date'], '512000', line['qui reçoit'], '', '', line['montant'])
     ];
 }
 
 function chargePersonEntry(line) {
     const piece = line['Facture correspondante'] ? `<a href="${line['Facture correspondante']}">facture</a>` : '';
     return [
-        createEntry(line['date'], findChartOfAccounts({ label: line['poste'] }).account, '', line['montant'], ''),
-        createEntry(line['date'], '467000', piece, '', line['montant'])
+        createEntry(line['date'], findChartOfAccounts({ label: line['poste'] }).account, line['qui reçoit'], '', line['montant'], ''),
+        createEntry(line['date'], '467000', line['qui reçoit'], piece, '', line['montant'])
     ];
 }
 
 function saleEntry(line) {
     return [
         createEntry(line['date'], findChartOfAccounts({ label: line['poste'] }).account, '', '', line['montant']),
-        createEntry(line['date'], '411000', line['Facture correspondante'], line['montant'], ''),
-        createEntry(line['date'], '411000', line['Facture correspondante'], '', line['montant']),
-        createEntry(line['date'], '512000', '', line['montant'], '')
+        createEntry(line['date'], '411000', line['qui reçoit'], line['Facture correspondante'], line['montant'], ''),
+        createEntry(line['date'], '411000', line['qui reçoit'], line['Facture correspondante'], '', line['montant']),
+        createEntry(line['date'], '512000', line['qui reçoit'], '', line['montant'], '')
     ];
 }
 
@@ -112,7 +112,7 @@ export function generateLedger(journalEntries) {
                 total.credit += convertToNumber(entry["Crédit (€)"]);
                 return {
                     Date: entry.Date,
-                    Libellé: findChartOfAccounts({ account: entry.Compte }).label,
+                    Libellé: entry["Libellé"],
                     "Débit (€)": entry["Débit (€)"],
                     "Crédit (€)": entry["Crédit (€)"],
                 }
