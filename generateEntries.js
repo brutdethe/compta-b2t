@@ -1,4 +1,4 @@
-function findChartOfAccounts({ account = "", label = "" }) {
+export function findChartOfAccounts({ account, label }) {
     const chartOfAccounts = {
         "275000": "dépôts et cautionnements versés",
         "401000": "fournisseurs",
@@ -110,8 +110,8 @@ export function generateLedger(journalEntries) {
                 }
             });
 
-        ledgerEntries[account].push([{ Date: "31/12/2021", Libellé: "Total", "Débit (€)": total.debit, "Crédit (€)": total.credit }])
-        ledgerEntries[account].push([{ Date: "31/12/2021", Libellé: "Solde", "Débit (€)": total.debit > total.credit ? total.debit : "", "Crédit (€)": total.debit < total.credit ? total.credit : "" }])
+        ledgerEntries[account].push({ Date: "31/12/2021", Libellé: "Total", "Débit (€)": total.debit, "Crédit (€)": total.credit })
+        ledgerEntries[account].push({ Date: "31/12/2021", Libellé: "Solde", "Débit (€)": total.debit > total.credit ? total.debit : "", "Crédit (€)": total.debit < total.credit ? total.credit : "" })
     })
 
     return ledgerEntries;
