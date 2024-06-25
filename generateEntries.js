@@ -108,8 +108,8 @@ export function generateLedger(journalEntries) {
         ledgerEntries[account] = journalEntries
             .filter(({ Compte }) => Compte === account)
             .map(entry => {
-                total.credit += convertToNumber(entry["Débit (€)"]);
-                total.debit += convertToNumber(entry["Crédit (€)"]);
+                total.debit += convertToNumber(entry["Débit (€)"]);
+                total.credit += convertToNumber(entry["Crédit (€)"]);
                 return {
                     Date: entry.Date,
                     Libellé: findChartOfAccounts({ account: entry.Compte }).label,
