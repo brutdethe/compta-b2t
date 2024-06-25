@@ -40,7 +40,7 @@ function createEntry(date, account, piece, debit, credit) {
 
 function refundEntry(line) {
     return [
-        createEntry(line['date'], '407000', line['qui reçoit'], line['montant'], ''),
+        createEntry(line['date'], '467000', line['qui reçoit'], line['montant'], ''),
         createEntry(line['date'], '512000', '', '', line['montant'])
     ];
 }
@@ -59,7 +59,7 @@ function chargePersonEntry(line) {
     const piece = line['Facture correspondante'] ? `<a href="${line['Facture correspondante']}">facture</a>` : '';
     return [
         createEntry(line['date'], findChartOfAccounts({ label: line['poste'] }).account, '', line['montant'], ''),
-        createEntry(line['date'], '407000', piece, '', line['montant'])
+        createEntry(line['date'], '467000', piece, '', line['montant'])
     ];
 }
 
@@ -113,6 +113,4 @@ export function generateLedger(journalEntries) {
         ledgerEntries[account].push([{ Date: "31/12/2021", Libellé: "Total", "Débit (€)": total.debit, "Crédit (€)": total.credit }])
         ledgerEntries[account].push([{ Date: "31/12/2021", Libellé: "Solde", "Débit (€)": total.debit > total.credit ? total.debit : "", "Crédit (€)": total.debit < total.credit ? total.credit : "" }])
     })
-
-    console.log("ledgerEntries", ledgerEntries);
 }

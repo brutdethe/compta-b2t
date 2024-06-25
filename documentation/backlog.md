@@ -5,7 +5,7 @@
 - [x] séparer la fabrication des écritures du journal
 - [x] réinjecter le journal
 - [x] fabriquer les données
-- [] calculer un compte
+- [x] calculer un compte
 - [] afficher tous les compte
 - [] gérer les labels
 
