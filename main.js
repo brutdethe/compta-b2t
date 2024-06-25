@@ -12,7 +12,7 @@ fetch('001_compta-b2t.csv')
     .then(csvText => {
         const jsonData = parseCSV(csvText);
         const journalEntries = jsonData.flatMap(line => lineToEntry(line));
-        const ledgerData = []
+        let ledgerData = []
 
         if (document.getElementById('journal-entries')) {
             injectEntriesIntoTable(journalEntries);

@@ -25,6 +25,14 @@ function findChartOfAccounts({ account = "", label = "" }) {
     return { account: 'xxxxxx', label: 'non défini' };
 }
 
+function convertToNumber(euroString) {
+    let cleanString = euroString.replace(/\s/g, '').replace('€', '');
+    cleanString = cleanString.replace(',', '.');
+
+    return parseFloat(cleanString || 0);
+}
+
+
 
 function createEntry(date, account, piece, debit, credit) {
     return { 'Date': date, 'Compte': account, 'Pièce': piece || '', 'Débit (€)': debit || '', 'Crédit (€)': credit || '' };
@@ -86,11 +94,14 @@ export function lineToEntry(line) {
 export function generateLedger(journalEntries) {
     const ledgerEntries = {};
     const accounts = Array.from(new Set(journalEntries.map(({ Compte }) => Compte).sort()))
-
     accounts.map(account => {
+        let total = { credit: 0, debit: 0 };
+
         ledgerEntries[account] = journalEntries
             .filter(({ Compte }) => Compte === account)
             .map(entry => {
+                total.credit += convertToNumber(entry["Débit (€)"]);
+                total.debit += convertToNumber(entry["Crédit (€)"]);
                 return {
                     Date: entry.Date,
                     Libellé: findChartOfAccounts({ account: entry.Compte }).label,
@@ -98,8 +109,9 @@ export function generateLedger(journalEntries) {
                     "Crédit (€)": entry["Crédit (€)"],
                 }
             })
-        ledgerEntries[account].push([{ Date: "31/12/2021", Libellé: "Total", "Débit (€)": 13, "Crédit (€)": 56 }])
-        ledgerEntries[account].push([{ Date: "31/12/2021", Libellé: "Solde", "Débit (€)": 13, "Crédit (€)": 56 }])
+
+        ledgerEntries[account].push([{ Date: "31/12/2021", Libellé: "Total", "Débit (€)": total.debit, "Crédit (€)": total.credit }])
+        ledgerEntries[account].push([{ Date: "31/12/2021", Libellé: "Solde", "Débit (€)": total.debit > total.credit ? total.debit : "", "Crédit (€)": total.debit < total.credit ? total.credit : "" }])
     })
 
     console.log("ledgerEntries", ledgerEntries);
