@@ -69,12 +69,20 @@ table td {
     background-color: #fff;
 }
 
-table tr.sold,
-table tr.total {
-    font-weight: bold;
-}
-
 h1 {
     text-align: center;
     margin-bottom: 20px;
+}
+
+.account {
+    margin-bottom: 20px;
+}
+
+.account h2 {
+    margin-bottom: 10px;
+}
+
+.total,
+.solde {
+    font-weight: bold;
 }

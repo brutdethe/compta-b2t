@@ -1,22 +1,29 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Comptabilité</title>
-<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compta B2T</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Application de Comptabilité</h1>
-    <nav>
-      <ul>
-        <li><a href="journal.html">Journal Général</a></li>
-        <li><a href="grand-livre.html">Grand Livre</a></li>
-        <li><a href="compte-resultat.html">Compte de Résultat</a></li>
-        <li><a href="bilan.html">Bilan</a></li>
-      </ul>
-    </nav>
-  </div>
+    <h1>Journal Entries</h1>
+    <table id="journal-entries">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Compte</th>
+                <th>Pièce</th>
+                <th>Débit (€)</th>
+                <th>Crédit (€)</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <h1>Ledger Entries</h1>
+    <div id="ledger-entries"></div>
+
+    <script type="module" src="main.js"></script>
 </body>
 </html>

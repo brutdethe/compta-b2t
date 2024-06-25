@@ -26,24 +26,23 @@ export function findChartOfAccounts({ account, label }) {
 }
 
 function convertToNumber(euroString) {
-    let cleanString = euroString.replace(/\s/g, '').replace('€', '');
-    cleanString = cleanString.replace(',', '.');
-
+    const cleanString = euroString.replace(/\s/g, '').replace('€', '').replace(',', '.');
     return parseFloat(cleanString || 0);
 }
 
 function formatToCurrency(number) {
-    if (typeof number === 'number') {
-        return number
-            .toFixed(2)
-            .replace('.', ',') + ' €';
-    }
-
-    return number;
+    return number.toFixed(2).replace('.', ',') + ' €';
 }
 
 function createEntry(date, account, receiver, piece, debit, credit) {
-    return { 'Date': date, 'Compte': account, 'Libellé': receiver, 'Pièce': piece || '', 'Débit (€)': debit || '', 'Crédit (€)': credit || '' };
+    return {
+        'Date': date,
+        'Compte': account,
+        'Libellé': receiver,
+        'Pièce': piece || '',
+        'Débit (€)': debit || '',
+        'Crédit (€)': credit || ''
+    };
 }
 
 function refundEntry(line) {
@@ -73,7 +72,7 @@ function chargePersonEntry(line) {
 
 function saleEntry(line) {
     return [
-        createEntry(line['date'], findChartOfAccounts({ label: line['poste'] }).account, '', '', line['montant']),
+        createEntry(line['date'], findChartOfAccounts({ label: line['poste'] }).account, line['qui reçoit'], '', '', line['montant']),
         createEntry(line['date'], '411000', line['qui reçoit'], line['Facture correspondante'], line['montant'], ''),
         createEntry(line['date'], '411000', line['qui reçoit'], line['Facture correspondante'], '', line['montant']),
         createEntry(line['date'], '512000', line['qui reçoit'], '', line['montant'], '')
@@ -81,46 +80,47 @@ function saleEntry(line) {
 }
 
 export function lineToEntry(line) {
-    const accountNumber = findChartOfAccounts({ label: line['poste'] }).account;
-    if (accountNumber.startsWith('4')) {
-        return refundEntry(line);
-    }
-    if (accountNumber.startsWith('6')) {
-        if (line['qui paye ?'] === 'B2T') {
-            return chargeB2TEntry(line);
-        } else {
-            return chargePersonEntry(line);
-        }
-    }
-    if (accountNumber.startsWith('7')) {
-        return saleEntry(line);
-    }
+    const accountNumber = findChartOfAccounts({ label: line.poste }).account;
+    if (accountNumber.startsWith('4')) return refundEntry(line);
+    if (accountNumber.startsWith('6')) return line['qui paye ?'] === 'B2T' ? chargeB2TEntry(line) : chargePersonEntry(line);
+    if (accountNumber.startsWith('7')) return saleEntry(line);
 
     throw new Error(`L'écriture ${JSON.stringify(line)} n'a pu être rendue !`);
 }
 
 export function generateLedger(journalEntries) {
     const ledgerEntries = {};
-    const accounts = Array.from(new Set(journalEntries.map(({ Compte }) => Compte).sort()))
-    accounts.map(account => {
+    const accounts = [...new Set(journalEntries.map(({ Compte }) => Compte))].sort();
+    accounts.forEach(account => {
         let total = { credit: 0, debit: 0 };
 
         ledgerEntries[account] = journalEntries
-            .filter(({ Compte }) => Compte === account)
+            .filter(entry => entry.Compte === account)
             .map(entry => {
-                total.debit += convertToNumber(entry["Débit (€)"]);
-                total.credit += convertToNumber(entry["Crédit (€)"]);
+                total.debit += convertToNumber(entry['Débit (€)']);
+                total.credit += convertToNumber(entry['Crédit (€)']);
                 return {
                     Date: entry.Date,
-                    Libellé: entry["Libellé"],
-                    "Débit (€)": entry["Débit (€)"],
-                    "Crédit (€)": entry["Crédit (€)"],
-                }
+                    Libellé: entry.Libellé,
+                    'Débit (€)': entry['Débit (€)'],
+                    'Crédit (€)': entry['Crédit (€)'],
+                };
             });
 
-        ledgerEntries[account].push({ Date: "31/12/2021", Libellé: "Total", "Débit (€)": formatToCurrency(total.debit), "Crédit (€)": formatToCurrency(total.credit) })
-        ledgerEntries[account].push({ Date: "31/12/2021", Libellé: "Solde", "Débit (€)": formatToCurrency(total.debit > total.credit ? total.debit - total.credit : ""), "Crédit (€)": formatToCurrency(total.debit < total.credit ? total.credit - total.debit : "") })
-    })
+        ledgerEntries[account].push({
+            Date: '31/12/2021',
+            Libellé: 'Total',
+            'Débit (€)': formatToCurrency(total.debit),
+            'Crédit (€)': formatToCurrency(total.credit)
+        });
+
+        ledgerEntries[account].push({
+            Date: '31/12/2021',
+            Libellé: 'Solde',
+            'Débit (€)': total.debit > total.credit ? formatToCurrency(total.debit - total.credit) : '',
+            'Crédit (€)': total.debit < total.credit ? formatToCurrency(total.credit - total.debit) : ''
+        });
+    });
 
     return ledgerEntries;
 }
