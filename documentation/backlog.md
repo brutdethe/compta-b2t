@@ -5,7 +5,7 @@
 - [x] injecter avec des données statiques
 - [x] injecter avec des données exemples
 - [x] injecter les produits
-- [ ] calculer les totaux
+- [x] calculer les totaux
 - [ ] calculer toutes les rubriques, 
 
 #### Notes
