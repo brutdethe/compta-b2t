@@ -124,3 +124,8 @@ export function generateLedger(journalEntries) {
 
     return ledgerEntries;
 }
+
+export function generateIncomeStatement(journalEntries) {
+    console.log("generateIncomeStatement")
+    return
+}

@@ -1,6 +1,6 @@
 import { parseCSV } from './parseCSV.js';
-import { lineToEntry, generateLedger } from './generateEntries.js';
-import { injectEntriesIntoTable, injectLedgerEntries } from './injectEntries.js';
+import { lineToEntry, generateLedger, generateIncomeStatement } from './generateEntries.js';
+import { injectEntriesIntoTable, injectLedgerEntries, injectIncomeStatementEntries } from './injectEntries.js';
 
 fetch('001_compta-b2t.csv')
     .then(response => {
@@ -16,6 +16,11 @@ fetch('001_compta-b2t.csv')
         if (document.getElementById('ledger-entries')) {
             const ledgerEntries = generateLedger(journalEntries);
             injectLedgerEntries(ledgerEntries);
+        }
+        if (document.getElementById('income-statement-entries')) {
+            console.log("income-statement in main")
+            const incomeStatementEntries = generateIncomeStatement(journalEntries);
+            injectIncomeStatementEntries(incomeStatementEntries);
         }
     })
     .catch(error => console.error('There has been a problem with your fetch operation:', error));
