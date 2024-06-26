@@ -47,3 +47,77 @@ export function injectLedgerEntries(ledgerEntries) {
         ledgerContainer.appendChild(accountSection);
     });
 }
+
+export function injectIncomeStatementEntries(entries) {
+    const tableBody = document.getElementById('income-statement-entries');
+        tableBody.innerHTML = `
+            <tr>
+                <td>Produits d'exploitation</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>&nbsp;&nbsp;&nbsp;Cotisations des membres</td>
+                <td>${entries.contributions}</td>
+            </tr>
+            <tr>
+                <td>&nbsp;&nbsp;&nbsp;Dons</td>
+                <td>${entries.donations}</td>
+            </tr>
+            <tr>
+                <td>&nbsp;&nbsp;&nbsp;Ventes de produits</td>
+                <td>${entries.productSales}</td>
+            </tr>
+            <tr>
+                <td>&nbsp;&nbsp;&nbsp;Prestations de services</td>
+                <td>${entries.serviceRevenue}</td>
+            </tr>
+            <tr class="total">
+                <td>Total des produits d'exploitation</td>
+                <td>${entries.totalOperatingIncome}</td>
+            </tr>
+            <tr>
+                <td>Charges d'exploitation</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>&nbsp;&nbsp;&nbsp;Achats consommés de matières et fournitures</td>
+                <td>${entries.materialsAndSupplies}</td>
+            </tr>
+            <tr>
+                <td>&nbsp;&nbsp;&nbsp;Services extérieurs</td>
+                <td>${entries.externalServices}</td>
+            </tr>
+            <tr>
+                <td>&nbsp;&nbsp;&nbsp;Autres charges externes</td>
+                <td>${entries.otherExternalCharges}</td>
+            </tr>
+            <tr>
+                <td>&nbsp;&nbsp;&nbsp;Impôts, taxes et versements assimilés</td>
+                <td>${entries.taxes}</td>
+            </tr>
+            <tr>
+                <td>&nbsp;&nbsp;&nbsp;Charges financières</td>
+                <td>${entries.financialCharges}</td>
+            </tr>
+            <tr>
+                <td>&nbsp;&nbsp;&nbsp;Dotations aux amortissements et provisions</td>
+                <td>${entries.depreciationAndProvisions}</td>
+            </tr>
+            <tr class="total">
+                <td>Total des charges d'exploitation</td>
+                <td>${entries.totalOperatingExpenses}</td>
+            </tr>
+            <tr class="total">
+                <td>Résultat courant avant impôts</td>
+                <td>${entries.currentResultBeforeTax}</td>
+            </tr>
+            <tr>
+                <td>Impôt sur les bénéfices</td>
+                <td>${entries.taxOnProfits}</td>
+            </tr>
+            <tr class="total">
+                <td>Résultat net</td>
+                <td>${entries.netResult}</td>
+            </tr>
+        `;
+}

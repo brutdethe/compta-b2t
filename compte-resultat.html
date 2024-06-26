@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Grand Livre</title>
+<title>Compte de Résultat</title>
 <link rel="stylesheet" href="styles.css">
 <script type="module" src="main.js" defer></script>
 </head>
@@ -17,9 +17,19 @@
       <li><a href="bilan.html">Bilan</a></li>
     </ul>
   </nav>
-  <div class="ledger" id="ledger-entries">
-    <h1>Grand Livre</h1>
-    <!-- Les entrées du journal seront insérées ici -->
+  <div class="compte-resultat">
+    <h1>Compte de Résultat</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Libellé</th>
+          <th>Montant (€)</th>
+        </tr>
+      </thead>
+      <tbody id="income-statement-entries">
+        <!-- Les entrées du journal seront insérées ici -->
+    </tbody>
+    </table>
   </div>
 </body>
 </html>
