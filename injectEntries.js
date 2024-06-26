@@ -108,14 +108,6 @@ export function injectIncomeStatementEntries(entries) {
                 <td>${entries.totalOperatingExpenses}</td>
             </tr>
             <tr class="total">
-                <td>Résultat d'exploitation</td>
-                <td>${entries.operatingResult}</td>
-            </tr>
-            <tr class="total">
-                <td>Résultat financier</td>
-                <td>${entries.financialResult}</td>
-            </tr>
-            <tr class="total">
                 <td>Résultat courant avant impôts</td>
                 <td>${entries.currentResultBeforeTax}</td>
             </tr>

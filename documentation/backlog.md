@@ -6,7 +6,7 @@
 - [x] injecter avec des données exemples
 - [x] injecter les produits
 - [x] calculer les totaux
-- [ ] calculer toutes les rubriques, 
+- [x] calculer toutes les rubriques, 
 
 #### Notes
 

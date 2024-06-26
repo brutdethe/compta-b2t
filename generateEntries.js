@@ -132,18 +132,16 @@ export function generateIncomeStatement(journalEntries) {
         productSales: formatToCurrency(getAccountBalance(journalEntries, "707000")),
         serviceRevenue: formatToCurrency(getAccountBalance(journalEntries, "706000")),
         totalOperatingIncome: "0,00 €",
-        materialsAndSupplies: "(5,000.00 €)",
-        externalServices: "(6,000.00 €)",
-        otherExternalCharges: "(1,500.00 €)",
-        taxes: "(500.00 €)",
-        financialCharges: "(200.00 €)",
-        depreciationAndProvisions: "(800.00 €)",
-        totalOperatingExpenses: "(14,000.00 €)",
-        operatingResult: "4,127.33 €",
-        financialResult: "500.00 €",
-        currentResultBeforeTax: "4,627.33 €",
-        taxOnProfits: "(2,500.00 €)",
-        netResult: "2,127.33 €"
+        materialsAndSupplies: formatToCurrency(getAccountBalance(journalEntries, "606000") + getAccountBalance(journalEntries, "607000")),
+        externalServices: formatToCurrency(getAccountBalance(journalEntries, "613000") + getAccountBalance(journalEntries, "625000") + getAccountBalance(journalEntries, "626000")),
+        otherExternalCharges: "0,00 €",
+        taxes: "0,00 €",
+        financialCharges: "0,00 €",
+        depreciationAndProvisions: "0,00 €",
+        totalOperatingExpenses: "0,00 €",
+        currentResultBeforeTax: "0,00 €",
+        taxOnProfits: "0,00 €",
+        netResult: "0,00 €"
     };
 
     function getAccountBalance(entries, accountNumber) {
@@ -159,8 +157,20 @@ export function generateIncomeStatement(journalEntries) {
             convertToNumber(incomeStatementEntries.serviceRevenue)
     }
 
-    incomeStatementEntries.totalOperatingIncome = formatToCurrency(getTotalOperatingIncome())
+    function getTotalOperatingExpenses() {
+        return convertToNumber(incomeStatementEntries.materialsAndSupplies) +
+            convertToNumber(incomeStatementEntries.externalServices) +
+            convertToNumber(incomeStatementEntries.otherExternalCharges) +
+            convertToNumber(incomeStatementEntries.taxes) +
+            convertToNumber(incomeStatementEntries.financialCharges) +
+            convertToNumber(incomeStatementEntries.depreciationAndProvisions)
+    }
 
+    incomeStatementEntries.totalOperatingIncome = formatToCurrency(getTotalOperatingIncome())
+    incomeStatementEntries.totalOperatingExpenses = formatToCurrency(getTotalOperatingExpenses())
+    incomeStatementEntries.currentResultBeforeTax = formatToCurrency(getTotalOperatingIncome() + getTotalOperatingExpenses())
+    incomeStatementEntries.taxOnProfits = (getTotalOperatingIncome() + getTotalOperatingExpenses()) > 0 ? formatToCurrency((getTotalOperatingIncome() + getTotalOperatingExpenses()) * .15) : "0,00 €"
+    incomeStatementEntries.netResult = formatToCurrency(getTotalOperatingIncome() + getTotalOperatingExpenses() - convertToNumber(incomeStatementEntries.taxOnProfits))
 
     return incomeStatementEntries
 }
