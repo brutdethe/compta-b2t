@@ -3,6 +3,8 @@
 ## US4 Consolidation
 - [x] insérer 2011
 - [x] navigation : distinguer la rubrique sélectionner
+- [ ] pièces absentes dans le journal
+- [ ] reprendre les labels pour le grand livre
 - [ ] gérer la caisse
 - [ ] immobilisations machine
 - [ ] stripe écritures
