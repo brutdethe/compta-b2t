@@ -39,6 +39,11 @@ nav ul li a:hover {
     background: #bbb;
 }
 
+.menu-selected a {
+    background: #666;
+    color: #eee;
+}
+
 .journal,
 .ledger,
 .compte-resultat,
