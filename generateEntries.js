@@ -126,6 +126,33 @@ export function generateLedger(journalEntries) {
 }
 
 export function generateIncomeStatement(journalEntries) {
-    console.log("generateIncomeStatement")
-    return
+    const incomeStatementEntries = {
+        contributions: formatToCurrency(getAccountBalance(journalEntries, "756000")),
+        donations: formatToCurrency(getAccountBalance(journalEntries, "754100")),
+        productSales: formatToCurrency(getAccountBalance(journalEntries, "707000")),
+        serviceRevenue: formatToCurrency(getAccountBalance(journalEntries, "706000")),
+        totalOperatingIncome: "18,127.33 €",
+        materialsAndSupplies: "(5,000.00 €)",
+        externalServices: "(6,000.00 €)",
+        otherExternalCharges: "(1,500.00 €)",
+        taxes: "(500.00 €)",
+        financialCharges: "(200.00 €)",
+        depreciationAndProvisions: "(800.00 €)",
+        totalOperatingExpenses: "(14,000.00 €)",
+        operatingResult: "4,127.33 €",
+        financialResult: "500.00 €",
+        currentResultBeforeTax: "4,627.33 €",
+        taxOnProfits: "(2,500.00 €)",
+        netResult: "2,127.33 €"
+    };
+
+    function getAccountBalance(entries, accountNumber) {
+        return entries
+            .filter(entry => entry.Compte === accountNumber)
+            .reduce((balance, entry) => balance + convertToNumber(entry["Crédit (€)"]) - convertToNumber(entry["Débit (€)"]), 0);
+    }
+
+    console.log("journalEntries", )
+
+    return incomeStatementEntries
 }

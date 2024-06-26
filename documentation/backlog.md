@@ -3,8 +3,9 @@
 ## US3 Construire le compte de résultat
 - [x] créer une page modèle statique
 - [x] injecter avec des données statiques
-- [ ] injecter avec des données exemples
-- [ ] calculer quelques rubriques
+- [x] injecter avec des données exemples
+- [x] injecter les produits
+- [ ] calculer les totaux
 - [ ] calculer toutes les rubriques, 
 
 #### Notes

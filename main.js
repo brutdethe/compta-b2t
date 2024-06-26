@@ -18,7 +18,6 @@ fetch('001_compta-b2t.csv')
             injectLedgerEntries(ledgerEntries);
         }
         if (document.getElementById('income-statement-entries')) {
-            console.log("income-statement in main")
             const incomeStatementEntries = generateIncomeStatement(journalEntries);
             injectIncomeStatementEntries(incomeStatementEntries);
         }

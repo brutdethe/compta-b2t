@@ -57,27 +57,23 @@ export function injectIncomeStatementEntries(entries) {
             </tr>
             <tr>
                 <td>&nbsp;&nbsp;&nbsp;Cotisations des membres</td>
-                <td>5,000.00 €</td>
+                <td>${entries.contributions}</td>
             </tr>
             <tr>
-                <td>&nbsp;&nbsp;&nbsp;Subventions d'exploitation</td>
-                <td>10,000.00 €</td>
+                <td>&nbsp;&nbsp;&nbsp;Dons</td>
+                <td>${entries.donations}</td>
             </tr>
             <tr>
-                <td>&nbsp;&nbsp;&nbsp;Dons et legs</td>
-                <td>2,000.00 €</td>
+                <td>&nbsp;&nbsp;&nbsp;Ventes de produits</td>
+                <td>${entries.productSales}</td>
             </tr>
             <tr>
-                <td>&nbsp;&nbsp;&nbsp;Ventes de produits ou services</td>
-                <td>8,000.00 €</td>
-            </tr>
-            <tr>
-                <td>&nbsp;&nbsp;&nbsp;Autres produits d'exploitation</td>
-                <td>1,000.00 €</td>
+                <td>&nbsp;&nbsp;&nbsp;Prestations de services</td>
+                <td>${entries.serviceRevenue}</td>
             </tr>
             <tr class="total">
                 <td>Total des produits d'exploitation</td>
-                <td>26,000.00 €</td>
+                <td>${entries.totalOperatingIncome}</td>
             </tr>
             <tr>
                 <td>Charges d'exploitation</td>
@@ -85,79 +81,51 @@ export function injectIncomeStatementEntries(entries) {
             </tr>
             <tr>
                 <td>&nbsp;&nbsp;&nbsp;Achats consommés de matières et fournitures</td>
-                <td>(5,000.00 €)</td>
+                <td>${entries.materialsAndSupplies}</td>
             </tr>
             <tr>
                 <td>&nbsp;&nbsp;&nbsp;Services extérieurs</td>
-                <td>(6,000.00 €)</td>
+                <td>${entries.externalServices}</td>
             </tr>
             <tr>
                 <td>&nbsp;&nbsp;&nbsp;Autres charges externes</td>
-                <td>(1,500.00 €)</td>
+                <td>${entries.otherExternalCharges}</td>
             </tr>
             <tr>
                 <td>&nbsp;&nbsp;&nbsp;Impôts, taxes et versements assimilés</td>
-                <td>(500.00 €)</td>
+                <td>${entries.taxes}</td>
             </tr>
             <tr>
                 <td>&nbsp;&nbsp;&nbsp;Charges financières</td>
-                <td>(200.00 €)</td>
+                <td>${entries.financialCharges}</td>
             </tr>
             <tr>
                 <td>&nbsp;&nbsp;&nbsp;Dotations aux amortissements et provisions</td>
-                <td>(800.00 €)</td>
+                <td>${entries.depreciationAndProvisions}</td>
             </tr>
             <tr class="total">
                 <td>Total des charges d'exploitation</td>
-                <td>(14,000.00 €)</td>
+                <td>${entries.totalOperatingExpenses}</td>
             </tr>
             <tr class="total">
                 <td>Résultat d'exploitation</td>
-                <td>12,000.00 €</td>
-            </tr>
-            <tr>
-                <td>Produits financiers</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>&nbsp;&nbsp;&nbsp;Revenus de placements</td>
-                <td>500.00 €</td>
+                <td>${entries.operatingResult}</td>
             </tr>
             <tr class="total">
                 <td>Résultat financier</td>
-                <td>500.00 €</td>
+                <td>${entries.financialResult}</td>
             </tr>
             <tr class="total">
                 <td>Résultat courant avant impôts</td>
-                <td>12,500.00 €</td>
-            </tr>
-            <tr>
-                <td>Résultat exceptionnel</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>&nbsp;&nbsp;&nbsp;Produits exceptionnels</td>
-                <td>300.00 €</td>
-            </tr>
-            <tr>
-                <td>&nbsp;&nbsp;&nbsp;Charges exceptionnelles</td>
-                <td>(100.00 €)</td>
-            </tr>
-            <tr class="total">
-                <td>Résultat exceptionnel</td>
-                <td>200.00 €</td>
-            </tr>
-            <tr class="total">
-                <td>Résultat courant avant impôts</td>
-                <td>12,700.00 €</td>
+                <td>${entries.currentResultBeforeTax}</td>
             </tr>
             <tr>
                 <td>Impôt sur les bénéfices</td>
-                <td>(2,500.00 €)</td>
+                <td>${entries.taxOnProfits}</td>
             </tr>
             <tr class="total">
                 <td>Résultat net</td>
-                <td>10,200.00 €</td>
+                <td>${entries.netResult}</td>
             </tr>
         `;
 }
