@@ -2,7 +2,7 @@ import { parseCSV } from './parseCSV.js';
 import { lineToEntry, generateLedger, generateIncomeStatement } from './generateEntries.js';
 import { injectEntriesIntoTable, injectLedgerEntries, injectIncomeStatementEntries } from './injectEntries.js';
 
-fetch('001_compta-b2t.csv')
+fetch('002_compta-b2t.csv')
     .then(response => {
         if (!response.ok) throw new Error('Network response was not ok');
         return response.text();

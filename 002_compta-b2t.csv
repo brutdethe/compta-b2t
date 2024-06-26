@@ -1,0 +1,106 @@
+qui paye ?,date,qui reçoit,Rbt,poste,montant,nature,pointage,note,facture correspondante
+Stéphane,03/01/2021,Heroku,,frais postaux et de télécommunications,"13,30 €",cb,,,20210103-heroku.pdf
+Stéphane,21/01/2021,Carrefour,,achats non stockés de matière et fournitures,"21,80 €",cb,,verres,20210121_carrefour.jpg
+Stéphane,29/01/2021,La poste,,frais postaux et de télécommunications,"7,35 €",esp,,,20210129_laposte.jpg
+Stéphane,03/02/2021,Heroku,,frais postaux et de télécommunications,"13,30 €",cb,,,20210203-heroku.pdf
+Stéphane,23/02/2021,B2T,,services bancaires et assimilés,"20,08 €",vir,x,ouverture du compte,20210223-wise.pdf
+Stéphane,23/02/2021,Tricolore,,frais postaux et de télécommunications,"29,76 €",cb,,,20210223-tricolores.pdf
+B2T,23/02/2021,Wise,,services bancaires et assimilés,"0,08 €",vir,x,charge transfert TRANSFER-230219395,
+Elie,25/02/2021,B2T,,ventes de marchandises,"25,00 €",esp,,Elie,
+Stéphane,03/03/2021,Heroku,,frais postaux et de télécommunications,"13,30 €",cb,,,20210303-heroku.pdf
+Dorland,03/03/2021,B2T,,ventes de marchandises,"60,00 €",cb,,3ème envoi Dorland,
+Stéphane,03/03/2021,Yunnan,Stéphane,achats de marchandises ,"273,11 €",cb,,,20210303-the-yunnan.pdf
+Stéphane,04/03/2021,Mountain stream,Stéphane,achats de marchandises ,"230,85 €",cb,,,20210304_mountainstream.jpg
+Dorland,05/03/2021,B2T,,ventes de marchandises,"23,00 €",cb,,Dorland,
+Dorland,05/03/2021,B2T,,ventes de marchandises,"12,00 €",cb,,1er envoi Dorland,
+Dorland,05/03/2021,B2T,,ventes de marchandises,"16,00 €",cb,,2ème envoi Dorland,
+Dorland,05/03/2021,B2T,,ventes de marchandises,"15,00 €",cb,,,
+Dagan-Masson,20/03/2021,B2T,,ventes de marchandises,"88,00 €",esp,,,
+Dagan-Masson,20/03/2021,B2T,,ventes de marchandises,"80,00 €",esp,,,
+Stéphane,23/03/2021,Tricolore,,frais postaux et de télécommunications,"29,76 €",cb,,,20210323-tricolores.pdf
+Stéphane,02/04/2021,Chawang,Stéphane,achats de marchandises ,"118,92 €",cb,,,20210402-chawan.pdf
+Stéphane,03/04/2021,Heroku,,frais postaux et de télécommunications,"13,30 €",cb,,,20210403-heroku.pdf
+Wise,13/04/2021,B2T,,services bancaires et assimilés,"21,00 €",vir,x,Création d'un IBAN,
+Stéphane,23/04/2021,Tricolore,,frais postaux et de télécommunications,"29,76 €",cb,,,20210423-tricolores.pdf
+Seilles,26/04/2021,B2T,,ventes de marchandises,"50,00 €",esp,,,
+Dorland,28/04/2021,B2T,,ventes de marchandises,"60,00 €",vir,x,,
+Dorland,28/04/2021,B2T,,ventes de marchandises,"21,00 €",esp,,4ème envoi Dorland,
+Tea,29/04/2021,B2T,,ventes de marchandises,"38,80 €",vir,,,20210429_tea.jpg
+Stéphane,03/05/2021,Heroku,,frais postaux et de télécommunications,"13,30 €",cb,,,20210503-heroku.pdf
+Dorland,03/05/2021,B2T,,ventes de marchandises,"15,00 €",esp,,,
+Dorland,03/05/2021,B2T,,ventes de marchandises,"15,00 €",esp,,,
+Stéphane,14/05/2021,Yunnan,Stéphane,achats de marchandises ,"127,00 €",cb,,1ère commande,20210518_yunnan.jpg
+Stéphane,16/05/2021,Filleule des Fées,,"frais de colloques, séminaires, conférences","16,00 €",cb,,ticket Stephane,20210516_ticket_fee-du-the_stephane.pdf
+Stéphane,16/05/2021,Filleule des Fées,,"frais de colloques, séminaires, conférences","16,00 €",cb,,ticket Violaine,20210516_ticket_fee-du-the_violaine.pdf
+Thaïs,16/05/2021,mère d'Ariel (HuBei),,achats de marchandises ,"54,00 €",cb,,thé vert torréfié,
+Thaïs,16/05/2021,RuoKaiMei,,achats de marchandises ,"76,00 €",cb,,thé vert sauvage,20210518_ruokaimei.jpg
+Dao Shan SA,18/05/2021,B2T,,prestations de services,"625,74 €",stripe,x,Facture stripe,2021-0001
+Stéphane,20/05/2021,Retif,,frais postaux et de télécommunications,"20,98 €",cb,,,20210520_retif.jpg
+Stéphane,23/05/2021,Tricolore,,frais postaux et de télécommunications,"29,76 €",cb,,,20210523-tricolores.pdf
+Thaïs,25/05/2021,WeiLaWei,,transports sur achats,"130,00 €",cb,,transport Chine France,
+Stéphane,27/05/2021,Douane,,achats de marchandises ,"34,00 €",cb,,Douane TieGuanYin,20210526_chronopost.jpg
+Esther,27/05/2021,B2T,,ventes de marchandises,"40,00 €",esp,,"Mei Ren, Tie Guan, Gaiwan",
+B2T,27/05/2021,Vera weft Wuhan,,achats de marchandises ,"280,00 €",vir,x,commande des gaiwan de voyage,20210520_retif.jpg
+B2T,27/05/2021,Wise,,services bancaires et assimilés,"3,83 €",vir,x,charge transfert TRANSFER-251851666,20210516_douane.jpg
+Thaïs,28/05/2021,ChenLi,,achats de marchandises ,"100,00 €",cb,,2 boites de thé fossile,
+info@mingshan.ch,28/05/2021,B2T,,ventes de marchandises,"90,00 €",stripe,x,Facture stripe,2021-0002
+B2T,02/06/2021,Yunnan Craft,,emballages,"10,58 €",vir,x,Papier Dai pour emballage Pu er et thé blanc,
+Keravel,04/06/2021,B2T,,ventes de marchandises,"47,00 €",esp,,Gaiwan Celadon + Verre,
+Keravel,04/06/2021,B2T,,ventes de marchandises,"33,00 €",esp,,Gaiwan Celadon + Verre,
+B2T,10/06/2021,FEDEX,,achats de marchandises ,"54,00 €",cb,x,Droits de douane Gaiwan sets,
+B2T,10/06/2021,Heroku,,frais postaux et de télécommunications,"11,51 €",cb,x,,20210603-heroku.pdf
+B2T,10/06/2021,Wise,,services bancaires et assimilés,"0,50 €",cb,x,charges transfert CARD-147335818,
+B2T,15/06/2021,Magazine Histoire de thé,,documentation technique,"13,00 €",cb,x,,
+Stéphane,21/06/2021,Pépinière Kervilou,,achats de marchandises ,"90,00 €",esp,,Théiers crozon,20210621_kervilou.jpg
+B2T,21/06/2021,Wise,,services bancaires et assimilés,"0,28 €",vir,x,charges transfert TRANSFER-260435634,
+B2T,21/06/2021,Zheng Xin Tang,,rémunérations d'intermédiaires et honoraires,"135,00 €",vir,x,Yalin,20210617_cours-Yalin.pdf
+B2T,27/06/2021,Tricolore,,frais postaux et de télécommunications,"29,76 €",vir,x,,20210623-tricolores.pdf
+B2T,08/07/2021,Tinware direct,,emballages,"10,46 €",cb,x,échantillons pour les boites de conditionnements du thé ,
+B2T,12/07/2021,Heroku,,frais postaux et de télécommunications,"11,51 €",cb,x,,20210703-heroku.pdf
+B2T,12/07/2021,Wise,,services bancaires et assimilés,"0,50 €",cb,x,charges transfert CARD-157545303,
+BT2,27/07/2021,Tricolore,,frais postaux et de télécommunications,"29,76 €",vir,x,,20210723-tricolores.pdf
+Stéphane,03/08/2021,GuPu,,ventes de marchandises,"93,10 €",vir,,,20210803_gupu.jpg
+B2T,05/08/2021,Rolling beers,,achats non stockés de matière et fournitures,"22,55 €",cb,x,Balance pour peser le thé,20210805_rolling_balance.pdf
+B2T,10/08/2021,Heroku,,frais postaux et de télécommunications,"11,81 €",cb,x,,20210803-heroku.pdf
+B2T,10/08/2021,Wise,,services bancaires et assimilés,"0,50 €",cb,x,charges transfert CARD-167905637,
+B2T,25/08/2021,Tricolore,,frais postaux et de télécommunications,"29,76 €",vir,x,,20210823-tricolores.pdf
+B2T,03/09/2021,Amazon,,achats non stockés de matière et fournitures,"29,17 €",cb,x,Stéphane : (aucune commande sur mon compte),
+Thaïs,06/09/2021,Ateliers YiXing,,achats de marchandises ,"35,00 €",cb,,Achat d'une théière yixing pour la boutique,
+B2T,13/09/2021,Heroku,,frais postaux et de télécommunications,"13,04 €",cb,x,,20210903-heroku.pdf
+B2T,13/09/2021,Wise,,services bancaires et assimilés,"0,50 €",cb,x,charges transfert CARD-181200914,
+B2T,27/09/2021,Tricolore,,frais postaux et de télécommunications,"29,76 €",vir,x,,20210923-tricolores.pdf
+B2T,11/10/2021,Heroku,,frais postaux et de télécommunications,"17,78 €",cb,x,,20211003-heroku.pdf
+B2T,11/10/2021,Wise,,services bancaires et assimilés,"0,70 €",cb,x,charges transfert CARD-192863128,
+antoine@naturalpad.fr,19/10/2021,B2T,,ventes de marchandises,"35,00 €",stripe,x,Paiement boutique,
+jejelarifle@gmail.com,28/10/2021,B2T,,ventes de marchandises,"65,00 €",stripe,x,Paiement boutique,
+paulinemtc@gmail.com,28/10/2021,B2T,,ventes de marchandises,"65,00 €",stripe,x,Paiement boutique,
+Stéphane,01/11/2021,Manon Clouzeau,,achats de marchandises ,"380,00 €",vir,,Achat de céramiques pour la boutique,20211101_clouzeau_ceramique.pdf
+paulinemtc@gmail.com,01/11/2021,B2T,,ventes de marchandises,"125,00 €",stripe,x,Paiement boutique,2021-0003
+B2T,09/11/2021,Heroku,,frais postaux et de télécommunications,"18,16 €",cb,x,,20211103-heroku.pdf
+B2T,09/11/2021,Wise,,services bancaires et assimilés,"0,70 €",cb,x,charges transfert CARD-205696973,
+luxyy625@gmail.com,14/11/2021,B2T,,ventes de marchandises,"105,00 €",stripe,x,Paiement boutique,
+scop@scopyleft.fr,16/11/2021,B2T,,ventes de marchandises,"30,00 €",stripe,x,Facture stripe,2021-000
+Stéphane,01/12/2021,Céramiste,,achats de marchandises ,"178,00 €",vir,,Achat de céramiques pour la boutique,
+Stéphane,01/12/2021,Céramiste,,achats de marchandises ,"65,00 €",vir,,2 bols + 2 Cha Bei,
+Cynthia chateau,01/12/2021,B2T,,ventes de marchandises,"10,00 €",esp,,HeiCha Liu Bao,
+Pascal Romain,01/12/2021,B2T,,ventes de marchandises,"15,00 €",esp,,Dan Cong FanShuXiang,
+violaine@brutdethe.fr,03/12/2021,B2T,,ventes de marchandises,"80,00 €",stripe,x,Paiement boutique,
+thomas@leslandesvivantes.fr,06/12/2021,B2T,,ventes de marchandises,"95,00 €",stripe,x,Facture stripe,2021-0005
+B2T,09/12/2021,Heroku,,frais postaux et de télécommunications,"18,12 €",cb,x,,20211203-heroku.pdf
+B2T,09/12/2021,Wise,,services bancaires et assimilés,"0,00 €",cb,x,charges transfert CARD-220098010,
+B2T,10/12/2021,Wise,,services bancaires et assimilés,"0,28 €",vir,x,charges transfert TRANSFER-333041433,
+B2T,10/12/2021,Yunnan Craft,,emballages,"15,28 €",vir,x,Achat de papier pour emballer les thés pu er et blancs,
+Stéphane,20/12/2021,Jé,,achats de marchandises ,"571,00 €",vir,,Achat de céramiques pour la boutique,20211220_jelepotier.pdf
+Elie,21/12/2021,B2T,,ventes de marchandises,"60,00 €",esp,,HeiCha Liu Bao,
+anonyme,21/12/2021,B2T,,ventes de marchandises,"8,00 €",esp,,HeiCha Liu Bao,
+Noëlle,21/12/2021,B2T,,ventes de marchandises,"15,00 €",esp,,HeiCha Liu Bao,
+Apicultrice,21/12/2021,B2T,,ventes de marchandises,"15,00 €",esp,,Lao Bai Cha,
+Elie,21/12/2021,B2T,,ventes de marchandises,"20,00 €",esp,,Manon bols,
+Elie,21/12/2021,B2T,,ventes de marchandises,"30,00 €",esp,,Manon gaiwan,
+Claire-Mathilde,21/12/2021,B2T,,ventes de marchandises,"90,00 €",esp,,set de Manon,
+Claire-Mathilde,21/12/2021,B2T,,ventes de marchandises,"15,00 €",esp,,Manon bol,
+Apicultrice,21/12/2021,B2T,,ventes de marchandises,"35,00 €",esp,,Manon bols,
+Herboriste,21/12/2021,B2T,,ventes de marchandises,"20,00 €",esp,,Manon verseuses,
+christiane.prigul@institut-confucius-montpellier.org,22/12/2021,B2T,,ventes de marchandises,"60,00 €",stripe,x,Facture stripe,2021-0006
+B2T,31/12/2021,Stéphane,,autres comptes débiteurs ou créditeurs,"696,00 €",esp,,,
+B2T,31/12/2021,Thaïs,,autres comptes débiteurs ou créditeurs,"132,80 €",esp,,,
