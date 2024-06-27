@@ -18,7 +18,7 @@
     </ul>
   </nav>
   <div class="compte-resultat">
-    <h1>Compte de Résultat</h1>
+    <h1>Compte de Résultat <button id="infoBtn">ℹ️</button></h1>
     <table>
       <thead>
         <tr>
@@ -30,6 +30,34 @@
         <!-- Les entrées du journal seront insérées ici -->
     </tbody>
     </table>
+  </div>
+
+  <div id="infoModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Notice Explicative - Compte de Résultat</h2>
+      <p>Le compte de résultat est un document comptable qui présente les produits et les charges de l'entreprise sur une période donnée, permettant de déterminer le résultat net (bénéfice ou perte) de l'entreprise. Voici les rubriques principales :</p>
+      <h3>Produits d'exploitation :</h3>
+      <p><strong>Cotisations des membres :</strong> Les contributions versées par les membres de l'organisation.</p>
+      <p><strong>Dons :</strong> Les contributions financières reçues sous forme de dons.</p>
+      <p><strong>Ventes de produits :</strong> Les revenus générés par la vente de produits.</p>
+      <p><strong>Prestations de services :</strong> Les revenus générés par la fourniture de services.</p>
+      <p><strong>Total des produits d'exploitation :</strong> La somme de toutes les sources de revenus d'exploitation.</p>
+      <h3>Charges d'exploitation :</h3>
+      <p><strong>Achats consommés de matières et fournitures :</strong> Le coût des matières premières et des fournitures utilisées dans l'exploitation.</p>
+      <p><strong>Services extérieurs :</strong> Les dépenses liées aux services fournis par des tiers, tels que les sous-traitants et les consultants.</p>
+      <p><strong>Autres charges externes :</strong> Les dépenses externes diverses non incluses dans les autres catégories.</p>
+      <p><strong>Impôts, taxes et versements assimilés :</strong> Les charges fiscales et les taxes liées à l'exploitation.</p>
+      <p><strong>Charges financières :</strong> Les coûts liés aux intérêts sur les emprunts et autres charges financières.</p>
+      <p><strong>Dotations aux amortissements et provisions :</strong> Les montants alloués à l'amortissement des actifs et aux provisions pour les dépenses futures.</p>
+      <p><strong>Total des charges d'exploitation :</strong> La somme de toutes les charges d'exploitation.</p>
+      <h3>Résultat courant avant impôts :</h3>
+      <p>La différence entre les produits d'exploitation et les charges d'exploitation.</p>
+      <h3>Impôt sur les bénéfices :</h3>
+      <p>Les taxes dues sur le résultat courant avant impôts.</p>
+      <h3>Résultat net :</h3>
+      <p>Le bénéfice ou la perte finale après déduction de l'impôt sur les bénéfices.</p>
+    </div>
   </div>
 </body>
 </html>

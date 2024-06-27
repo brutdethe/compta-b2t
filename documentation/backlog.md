@@ -8,13 +8,13 @@
 - [x] pièces absentes dans le journal
 - [x] gérer la caisse
 - [x] ajoute un style sur les titres du journal
+- [x] notice explicative pour chaque artefact
+- [x] collecter directement les données via le sheet
 - [ ] reprendre les labels pour le grand livre
+- [ ] notice avec exemples de toutes les écritures générées
 - [ ] immobilisations machine
 - [ ] stripe écritures
 - [ ] litige
-- [ ] notice avec exemples de toutes les écritures générées
-- [ ] notice explicative pour chaque artefact
-- [ ] collecter directement les données via le sheet
 - [ ] navigation : insérer dans chaque page
 
 ## US5 Construire le bilan

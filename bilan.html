@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bilan</title>
 <link rel="stylesheet" href="styles.css">
+<script type="module" src="main.js" defer></script>
 </head>
 <body>
   <nav>
@@ -17,7 +18,7 @@
     </ul>
   </nav>
   <div class="bilan">
-    <h1>Bilan- (Données fictives) </h1>
+    <h1>Bilan <button id="infoBtn">ℹ️</button></h1>
     <table>
       <thead>
         <tr>
@@ -114,6 +115,38 @@
         </tr>
       </tbody>
     </table>
+  </div>
+
+  <div id="infoModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Notice Explicative - Bilan</h2>
+      <p>Le bilan est un document comptable qui présente la situation financière de l'entreprise à une date donnée. Il se compose de deux parties : l'actif (ce que possède l'entreprise) et le passif (ce que doit l'entreprise). Voici les rubriques principales :</p>
+      <h3>Actif :</h3>
+      <p><strong>Actif immobilisé :</strong> Les biens destinés à servir de façon durable à l'activité de l'entreprise.</p>
+      <ul>
+        <li><strong>Immobilisations incorporelles :</strong> Actifs non physiques comme les brevets, les marques et le goodwill.</li>
+        <li><strong>Immobilisations corporelles :</strong> Actifs physiques tels que les terrains, les bâtiments et les équipements.</li>
+        <li><strong>Immobilisations financières :</strong> Participations financières et autres investissements à long terme.</li>
+      </ul>
+      <p><strong>Actif circulant :</strong> Les biens et les créances destinés à être utilisés ou transformés en trésorerie à court terme.</p>
+      <ul>
+        <li><strong>Stocks :</strong> Biens détenus en vue de la vente ou de la production.</li>
+        <li><strong>Créances :</strong> Sommes dues à l'entreprise par ses clients ou autres débiteurs.</li>
+        <li><strong>Disponibilités :</strong> Les liquidités disponibles immédiatement.</li>
+      </ul>
+      <h3>Passif :</h3>
+      <p><strong>Capitaux propres :</strong> Les ressources stables de l'entreprise, incluant le capital social, les réserves et le résultat net.</p>
+      <ul>
+        <li><strong>Fonds associatifs sans droit de reprise :</strong> Ressources apportées par les membres sans possibilité de reprise.</li>
+        <li><strong>Résultat de l'exercice :</strong> Bénéfice ou perte de l'exercice comptable.</li>
+      </ul>
+      <p><strong>Passif circulant :</strong> Les dettes à court terme de l'entreprise.</p>
+      <ul>
+        <li><strong>Dettes fournisseurs :</strong> Sommes dues aux fournisseurs pour des biens et services reçus.</li>
+        <li><strong>Autres dettes :</strong> Dettes diverses à court terme.</li>
+      </ul>
+    </div>
   </div>
 </body>
 </html>
