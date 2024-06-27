@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-fetch('002_compta-b2t.csv')
+fetch('https://docs.google.com/spreadsheets/d/1ZW7B8LixvWIWpFwUEF9bsXldgZGINrgu7Q4fF4PJDHk/export?format=csv&pli=1&gid=1093092905#gid=1093092905')
     .then(response => {
         if (!response.ok) throw new Error('Network response was not ok');
         return response.text();
