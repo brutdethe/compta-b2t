@@ -91,6 +91,11 @@ h1 {
 }
 
 .total,
-.solde {
+.solde,
+.income-statement-title {
     font-weight: bold;
+}
+
+.income-statement-title {
+    font-style: italic;
 }

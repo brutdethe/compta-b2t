@@ -53,7 +53,7 @@ export function injectIncomeStatementEntries(entries) {
     const tableBody = document.getElementById('income-statement-entries');
     tableBody.innerHTML = `
         <tr>
-            <td>Produits d'exploitation</td>
+            <td class="income-statement-title">Produits d'exploitation</td>
             <td></td>
         </tr>
         <tr>
@@ -77,7 +77,7 @@ export function injectIncomeStatementEntries(entries) {
             <td>${formatToCurrency(entries.totalOperatingIncome)}</td>
         </tr>
         <tr>
-            <td>Charges d'exploitation</td>
+            <td class="income-statement-title">Charges d'exploitation</td>
             <td></td>
         </tr>
         <tr>

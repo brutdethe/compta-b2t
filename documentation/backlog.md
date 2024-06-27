@@ -7,6 +7,7 @@
 - [x] simplifier les intitulés de comptes sheet
 - [x] pièces absentes dans le journal
 - [x] gérer la caisse
+- [x] ajoute un style sur les titres du journal
 - [ ] reprendre les labels pour le grand livre
 - [ ] immobilisations machine
 - [ ] stripe écritures
