@@ -1,35 +1,36 @@
 export function findChartOfAccounts({ account, label }) {
     const chartOfAccounts = {
-        "275000": "dépôts et cautionnements versés",
-        "401000": "fournisseurs",
-        "411000": "clients",
-        "467000": "autres comptes débiteurs ou créditeurs",
-        "512000": "banques",
-        "606000": "achats non stockés de matière et fournitures",
-        "602600": "emballages",
-        "607000": "achats de marchandises",
-        "613000": "locations",
-        "618300": "documentation technique",
-        "618500": "frais de colloques, séminaires, conférences",
-        "622000": "rémunérations d'intermédiaires et honoraires",
-        "624100": "transports sur achats",
-        "625000": "déplacements, missions et réceptions",
-        "626000": "frais postaux et de télécommunications",
-        "627000": "services bancaires et assimilés",
-        "706000": "prestations de services",
-        "707000": "ventes de marchandises",
-        "754100": "dons manuels",
-        "756000": "cotisations"
+        "275000": ["dépôts et cautionnements versés"],
+        "401000": ["fournisseurs"],
+        "411000": ["clients"],
+        "467000": ["autres comptes débiteurs ou créditeurs"],
+        "512000": ["banques"],
+        "606000": ["achats non stockés de matière et fournitures"],
+        "602600": ["emballages"],
+        "607000": ["achats de marchandises"],
+        "613000": ["locations"],
+        "618300": ["documentation technique"],
+        "618500": ["frais de colloques, séminaires, conférences"],
+        "622000": ["rémunérations d'intermédiaires et honoraires"],
+        "624100": ["transports sur achats"],
+        "625000": ["déplacements, missions et réceptions"],
+        "626000": ["frais postaux et de télécommunications", "internet", "poste", "téléphone", "hébergement web"],
+        "627000": ["services bancaires et assimilés"],
+        "706000": ["prestations de services"],
+        "707000": ["ventes de marchandises"],
+        "754100": ["dons manuels"],
+        "756000": ["cotisations"]
     };
 
     for (const [key, value] of Object.entries(chartOfAccounts)) {
-        if (account === key || label === value) {
-            return { account: key, label: value };
+        if (account === key || value.includes(label)) {
+            return { account: key, label: value[0] };
         }
     }
 
     return { account: 'xxxxxx', label: 'non défini' };
 }
+
 
 function convertToNumber(euroString) {
     const cleanString = euroString.replace(/\s/g, '').replace('€', '').replace(',', '.');
@@ -93,34 +94,39 @@ export function lineToEntry(line) {
 export function generateLedger(journalEntries) {
     const ledgerEntries = {};
     const accounts = [...new Set(journalEntries.map(({ Compte }) => Compte))].sort();
+
     accounts.forEach(account => {
-        let total = { credit: 0, debit: 0 };
+        let totalDebit = 0;
+        let totalCredit = 0;
 
         ledgerEntries[account] = journalEntries
             .filter(entry => entry.Compte === account)
             .map(entry => {
-                total.debit += +entry['Débit (€)'];
-                total.credit += +entry['Crédit (€)'];
+                const debit = +entry['Débit (€)'] || 0;
+                const credit = +entry['Crédit (€)'] || 0;
+                totalDebit += debit;
+                totalCredit += credit;
+
                 return {
                     Date: entry.Date,
                     Libellé: entry.Libellé,
-                    'Débit (€)': entry['Débit (€)'],
-                    'Crédit (€)': entry['Crédit (€)'],
+                    'Débit (€)': debit,
+                    'Crédit (€)': credit,
                 };
             });
 
         ledgerEntries[account].push({
             Date: '31/12/2021',
             Libellé: 'Total',
-            'Débit (€)': total.debit,
-            'Crédit (€)': total.credit
+            'Débit (€)': totalDebit,
+            'Crédit (€)': totalCredit
         });
 
         ledgerEntries[account].push({
             Date: '31/12/2021',
             Libellé: 'Solde',
-            'Débit (€)': total.debit > total.credit ? +total.debit - +total.credit : '',
-            'Crédit (€)': total.debit < total.credit ? +total.credit - +total.debit : ''
+            'Débit (€)': totalDebit > totalCredit ? totalDebit - totalCredit : '',
+            'Crédit (€)': totalCredit > totalDebit ? totalCredit - totalDebit : ''
         });
     });
 
@@ -128,51 +134,41 @@ export function generateLedger(journalEntries) {
 }
 
 export function generateIncomeStatement(journalEntries) {
-    const incomeStatementEntries = {
-        contributions: getAccountBalance(journalEntries, "756000"),
-        donations: getAccountBalance(journalEntries, "754100"),
-        productSales: getAccountBalance(journalEntries, "707000"),
-        serviceRevenue: getAccountBalance(journalEntries, "706000"),
-        totalOperatingIncome: 0.00,
-        materialsAndSupplies: getAccountBalance(journalEntries, "602600") + getAccountBalance(journalEntries, "606000") + getAccountBalance(journalEntries, "607000"),
-        externalServices: getAccountBalance(journalEntries, "613000") + getAccountBalance(journalEntries, "618500") + getAccountBalance(journalEntries, "622000") + getAccountBalance(journalEntries, "624100") + getAccountBalance(journalEntries, "625000") + getAccountBalance(journalEntries, "626000") + getAccountBalance(journalEntries, "627000"),
-        otherExternalCharges: 0.00,
-        taxes: 0.00,
-        financialCharges: 0.00,
-        depreciationAndProvisions: 0.00,
-        totalOperatingExpenses: 0.00,
-        currentResultBeforeTax: 0.00,
-        taxOnProfits: 0.00,
-        netResult: 0.00
-    };
-
     function getAccountBalance(entries, accountNumber) {
         return entries
             .filter(entry => entry.Compte === accountNumber)
             .reduce((balance, entry) => balance + entry["Crédit (€)"] - entry["Débit (€)"], 0);
     }
 
-    function getTotalOperatingIncome() {
-        return +incomeStatementEntries.contributions +
-            incomeStatementEntries.donations +
-            incomeStatementEntries.productSales +
-            incomeStatementEntries.serviceRevenue
-    }
+    const contributions = getAccountBalance(journalEntries, "756000");
+    const donations = getAccountBalance(journalEntries, "754100");
+    const productSales = getAccountBalance(journalEntries, "707000");
+    const serviceRevenue = getAccountBalance(journalEntries, "706000");
+    const materialsAndSupplies = getAccountBalance(journalEntries, "602600") + getAccountBalance(journalEntries, "606000") + getAccountBalance(journalEntries, "607000");
+    const externalServices = getAccountBalance(journalEntries, "613000") + getAccountBalance(journalEntries, "618500") + getAccountBalance(journalEntries, "622000") + getAccountBalance(journalEntries, "624100") + getAccountBalance(journalEntries, "625000") + getAccountBalance(journalEntries, "626000") + getAccountBalance(journalEntries, "627000");
 
-    function getTotalOperatingExpenses() {
-        return +incomeStatementEntries.materialsAndSupplies +
-            incomeStatementEntries.externalServices +
-            incomeStatementEntries.otherExternalCharges +
-            incomeStatementEntries.taxes +
-            incomeStatementEntries.financialCharges +
-            incomeStatementEntries.depreciationAndProvisions
-    }
+    const totalOperatingIncome = contributions + donations + productSales + serviceRevenue;
+    const totalOperatingExpenses = materialsAndSupplies + externalServices;
 
-    incomeStatementEntries.totalOperatingIncome = getTotalOperatingIncome()
-    incomeStatementEntries.totalOperatingExpenses = getTotalOperatingExpenses()
-    incomeStatementEntries.currentResultBeforeTax = getTotalOperatingIncome() + getTotalOperatingExpenses()
-    incomeStatementEntries.taxOnProfits = (getTotalOperatingIncome() + getTotalOperatingExpenses()) > 0 ? (getTotalOperatingIncome() + getTotalOperatingExpenses()) * .15 : 0.00
-    incomeStatementEntries.netResult = getTotalOperatingIncome() + getTotalOperatingExpenses() - incomeStatementEntries.taxOnProfits
+    const currentResultBeforeTax = totalOperatingIncome + totalOperatingExpenses;
+    const taxOnProfits = currentResultBeforeTax > 0 ? currentResultBeforeTax * 0.15 : 0.00;
+    const netResult = currentResultBeforeTax - taxOnProfits;
 
-    return incomeStatementEntries
+    return {
+        contributions,
+        donations,
+        productSales,
+        serviceRevenue,
+        totalOperatingIncome,
+        materialsAndSupplies,
+        externalServices,
+        otherExternalCharges: 0.00,
+        taxes: 0.00,
+        financialCharges: 0.00,
+        depreciationAndProvisions: 0.00,
+        totalOperatingExpenses,
+        currentResultBeforeTax,
+        taxOnProfits,
+        netResult
+    };
 }
