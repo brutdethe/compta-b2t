@@ -3,8 +3,9 @@ export function findChartOfAccounts({ account, label }) {
         "275000": ["dépôts et cautionnements versés"],
         "401000": ["fournisseurs"],
         "411000": ["clients"],
-        "467000": ["autres comptes débiteurs ou créditeurs"],
+        "467000": ["autres comptes débiteurs ou créditeurs", "remboursements"],
         "512000": ["banques"],
+        "530000": ["Caisse"],
         "606000": ["achats non stockés de matière et fournitures"],
         "602600": ["emballages"],
         "607000": ["achats de marchandises"],
@@ -49,19 +50,21 @@ function createEntry(date, account, receiver, piece, debit, credit) {
 }
 
 function refundEntry(line) {
+    const checkCash = line["nature"] === 'esp';
     return [
         createEntry(line['date'], '467000', line['qui reçoit'], line['qui reçoit'], convertToNumber(line['montant']), ''),
-        createEntry(line['date'], '512000', line['qui reçoit'], '', '', convertToNumber(line['montant']))
+        createEntry(line['date'], checkCash ? '530000' : '512000', line['qui reçoit'], '', '', convertToNumber(line['montant']))
     ];
 }
 
 function chargeB2TEntry(line) {
+    const checkCash = line["nature"] === 'esp';
     const piece = line['facture correspondante'] ? `<a href="${line['facture correspondante']}">facture</a>` : '';
     return [
         createEntry(line['date'], findChartOfAccounts({ label: line['poste'] }).account, line['qui reçoit'], '', convertToNumber(line['montant']), ''),
         createEntry(line['date'], '401000', line['qui reçoit'], piece, '', convertToNumber(line['montant'])),
         createEntry(line['date'], '401000', line['qui reçoit'], piece, convertToNumber(line['montant']), ''),
-        createEntry(line['date'], '512000', line['qui reçoit'], '', '', convertToNumber(line['montant']))
+        createEntry(line['date'], checkCash ? '530000' : '512000', line['qui reçoit'], '', '', convertToNumber(line['montant']))
     ];
 }
 
@@ -74,11 +77,12 @@ function chargePersonEntry(line) {
 }
 
 function saleEntry(line) {
+    const checkCash = line["nature"] === 'esp';
     return [
         createEntry(line['date'], findChartOfAccounts({ label: line['poste'] }).account, line['qui reçoit'], '', '', convertToNumber(line['montant'])),
         createEntry(line['date'], '411000', line['qui reçoit'], line['Facture correspondante'], convertToNumber(line['montant']), ''),
         createEntry(line['date'], '411000', line['qui reçoit'], line['Facture correspondante'], '', convertToNumber(line['montant'])),
-        createEntry(line['date'], '512000', line['qui reçoit'], '', convertToNumber(line['montant']), '')
+        createEntry(line['date'], checkCash ? '530000' : '512000', line['qui reçoit'], '', convertToNumber(line['montant']), '')
     ];
 }
 

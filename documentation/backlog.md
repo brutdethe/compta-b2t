@@ -6,8 +6,8 @@
 - [x] n'utiliser la forme en euros qu'à la fin
 - [x] simplifier les intitulés de comptes sheet
 - [x] pièces absentes dans le journal
+- [x] gérer la caisse
 - [ ] reprendre les labels pour le grand livre
-- [ ] gérer la caisse
 - [ ] immobilisations machine
 - [ ] stripe écritures
 - [ ] litige
