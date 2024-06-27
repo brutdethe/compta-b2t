@@ -5,7 +5,7 @@
 - [x] navigation : distinguer la rubrique sélectionner
 - [x] n'utiliser la forme en euros qu'à la fin
 - [x] simplifier les intitulés de comptes sheet
-- [ ] pièces absentes dans le journal
+- [x] pièces absentes dans le journal
 - [ ] reprendre les labels pour le grand livre
 - [ ] gérer la caisse
 - [ ] immobilisations machine

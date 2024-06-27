@@ -56,7 +56,7 @@ function refundEntry(line) {
 }
 
 function chargeB2TEntry(line) {
-    const piece = line['Facture correspondante'] ? `<a href="${line['Facture correspondante']}">facture</a>` : '';
+    const piece = line['facture correspondante'] ? `<a href="${line['facture correspondante']}">facture</a>` : '';
     return [
         createEntry(line['date'], findChartOfAccounts({ label: line['poste'] }).account, line['qui reçoit'], '', convertToNumber(line['montant']), ''),
         createEntry(line['date'], '401000', line['qui reçoit'], piece, '', convertToNumber(line['montant'])),
