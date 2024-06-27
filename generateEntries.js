@@ -36,10 +36,6 @@ function convertToNumber(euroString) {
     return parseFloat(cleanString || 0);
 }
 
-function formatToCurrency(number) {
-    return number.toFixed(2).replace('.', ',') + ' €';
-}
-
 function createEntry(date, account, receiver, piece, debit, credit) {
     return {
         'Date': date,
@@ -53,35 +49,35 @@ function createEntry(date, account, receiver, piece, debit, credit) {
 
 function refundEntry(line) {
     return [
-        createEntry(line['date'], '467000', line['qui reçoit'], line['qui reçoit'], line['montant'], ''),
-        createEntry(line['date'], '512000', line['qui reçoit'], '', '', line['montant'])
+        createEntry(line['date'], '467000', line['qui reçoit'], line['qui reçoit'], convertToNumber(line['montant']), ''),
+        createEntry(line['date'], '512000', line['qui reçoit'], '', '', convertToNumber(line['montant']))
     ];
 }
 
 function chargeB2TEntry(line) {
     const piece = line['Facture correspondante'] ? `<a href="${line['Facture correspondante']}">facture</a>` : '';
     return [
-        createEntry(line['date'], findChartOfAccounts({ label: line['poste'] }).account, line['qui reçoit'], '', line['montant'], ''),
-        createEntry(line['date'], '401000', line['qui reçoit'], piece, '', line['montant']),
-        createEntry(line['date'], '401000', line['qui reçoit'], piece, line['montant'], ''),
-        createEntry(line['date'], '512000', line['qui reçoit'], '', '', line['montant'])
+        createEntry(line['date'], findChartOfAccounts({ label: line['poste'] }).account, line['qui reçoit'], '', convertToNumber(line['montant']), ''),
+        createEntry(line['date'], '401000', line['qui reçoit'], piece, '', convertToNumber(line['montant'])),
+        createEntry(line['date'], '401000', line['qui reçoit'], piece, convertToNumber(line['montant']), ''),
+        createEntry(line['date'], '512000', line['qui reçoit'], '', '', convertToNumber(line['montant']))
     ];
 }
 
 function chargePersonEntry(line) {
     const piece = line['Facture correspondante'] ? `<a href="${line['Facture correspondante']}">facture</a>` : '';
     return [
-        createEntry(line['date'], findChartOfAccounts({ label: line['poste'] }).account, line['qui reçoit'], '', line['montant'], ''),
-        createEntry(line['date'], '467000', line['qui reçoit'], piece, '', line['montant'])
+        createEntry(line['date'], findChartOfAccounts({ label: line['poste'] }).account, line['qui reçoit'], '', convertToNumber(line['montant']), ''),
+        createEntry(line['date'], '467000', line['qui reçoit'], piece, '', convertToNumber(line['montant']))
     ];
 }
 
 function saleEntry(line) {
     return [
-        createEntry(line['date'], findChartOfAccounts({ label: line['poste'] }).account, line['qui reçoit'], '', '', line['montant']),
-        createEntry(line['date'], '411000', line['qui reçoit'], line['Facture correspondante'], line['montant'], ''),
-        createEntry(line['date'], '411000', line['qui reçoit'], line['Facture correspondante'], '', line['montant']),
-        createEntry(line['date'], '512000', line['qui reçoit'], '', line['montant'], '')
+        createEntry(line['date'], findChartOfAccounts({ label: line['poste'] }).account, line['qui reçoit'], '', '', convertToNumber(line['montant'])),
+        createEntry(line['date'], '411000', line['qui reçoit'], line['Facture correspondante'], convertToNumber(line['montant']), ''),
+        createEntry(line['date'], '411000', line['qui reçoit'], line['Facture correspondante'], '', convertToNumber(line['montant'])),
+        createEntry(line['date'], '512000', line['qui reçoit'], '', convertToNumber(line['montant']), '')
     ];
 }
 
@@ -103,8 +99,8 @@ export function generateLedger(journalEntries) {
         ledgerEntries[account] = journalEntries
             .filter(entry => entry.Compte === account)
             .map(entry => {
-                total.debit += convertToNumber(entry['Débit (€)']);
-                total.credit += convertToNumber(entry['Crédit (€)']);
+                total.debit += +entry['Débit (€)'];
+                total.credit += +entry['Crédit (€)'];
                 return {
                     Date: entry.Date,
                     Libellé: entry.Libellé,
@@ -116,15 +112,15 @@ export function generateLedger(journalEntries) {
         ledgerEntries[account].push({
             Date: '31/12/2021',
             Libellé: 'Total',
-            'Débit (€)': formatToCurrency(total.debit),
-            'Crédit (€)': formatToCurrency(total.credit)
+            'Débit (€)': total.debit,
+            'Crédit (€)': total.credit
         });
 
         ledgerEntries[account].push({
             Date: '31/12/2021',
             Libellé: 'Solde',
-            'Débit (€)': total.debit > total.credit ? formatToCurrency(total.debit - total.credit) : '',
-            'Crédit (€)': total.debit < total.credit ? formatToCurrency(total.credit - total.debit) : ''
+            'Débit (€)': total.debit > total.credit ? +total.debit - +total.credit : '',
+            'Crédit (€)': total.debit < total.credit ? +total.credit - +total.debit : ''
         });
     });
 
@@ -133,50 +129,50 @@ export function generateLedger(journalEntries) {
 
 export function generateIncomeStatement(journalEntries) {
     const incomeStatementEntries = {
-        contributions: formatToCurrency(getAccountBalance(journalEntries, "756000")),
-        donations: formatToCurrency(getAccountBalance(journalEntries, "754100")),
-        productSales: formatToCurrency(getAccountBalance(journalEntries, "707000")),
-        serviceRevenue: formatToCurrency(getAccountBalance(journalEntries, "706000")),
-        totalOperatingIncome: "0,00 €",
-        materialsAndSupplies: formatToCurrency(getAccountBalance(journalEntries, "602600") + getAccountBalance(journalEntries, "606000") + getAccountBalance(journalEntries, "607000")),
-        externalServices: formatToCurrency(getAccountBalance(journalEntries, "613000") + getAccountBalance(journalEntries, "618500") + getAccountBalance(journalEntries, "622000") + getAccountBalance(journalEntries, "624100") + getAccountBalance(journalEntries, "625000") + getAccountBalance(journalEntries, "626000") + getAccountBalance(journalEntries, "627000")),
-        otherExternalCharges: "0,00 €",
-        taxes: "0,00 €",
-        financialCharges: "0,00 €",
-        depreciationAndProvisions: "0,00 €",
-        totalOperatingExpenses: "0,00 €",
-        currentResultBeforeTax: "0,00 €",
-        taxOnProfits: "0,00 €",
-        netResult: "0,00 €"
+        contributions: getAccountBalance(journalEntries, "756000"),
+        donations: getAccountBalance(journalEntries, "754100"),
+        productSales: getAccountBalance(journalEntries, "707000"),
+        serviceRevenue: getAccountBalance(journalEntries, "706000"),
+        totalOperatingIncome: 0.00,
+        materialsAndSupplies: getAccountBalance(journalEntries, "602600") + getAccountBalance(journalEntries, "606000") + getAccountBalance(journalEntries, "607000"),
+        externalServices: getAccountBalance(journalEntries, "613000") + getAccountBalance(journalEntries, "618500") + getAccountBalance(journalEntries, "622000") + getAccountBalance(journalEntries, "624100") + getAccountBalance(journalEntries, "625000") + getAccountBalance(journalEntries, "626000") + getAccountBalance(journalEntries, "627000"),
+        otherExternalCharges: 0.00,
+        taxes: 0.00,
+        financialCharges: 0.00,
+        depreciationAndProvisions: 0.00,
+        totalOperatingExpenses: 0.00,
+        currentResultBeforeTax: 0.00,
+        taxOnProfits: 0.00,
+        netResult: 0.00
     };
 
     function getAccountBalance(entries, accountNumber) {
         return entries
             .filter(entry => entry.Compte === accountNumber)
-            .reduce((balance, entry) => balance + convertToNumber(entry["Crédit (€)"]) - convertToNumber(entry["Débit (€)"]), 0);
+            .reduce((balance, entry) => balance + entry["Crédit (€)"] - entry["Débit (€)"], 0);
     }
 
     function getTotalOperatingIncome() {
-        return convertToNumber(incomeStatementEntries.contributions) +
-            convertToNumber(incomeStatementEntries.donations) +
-            convertToNumber(incomeStatementEntries.productSales) +
-            convertToNumber(incomeStatementEntries.serviceRevenue)
+        return +incomeStatementEntries.contributions +
+            incomeStatementEntries.donations +
+            incomeStatementEntries.productSales +
+            incomeStatementEntries.serviceRevenue
     }
 
     function getTotalOperatingExpenses() {
-        return convertToNumber(incomeStatementEntries.materialsAndSupplies) +
-            convertToNumber(incomeStatementEntries.externalServices) +
-            convertToNumber(incomeStatementEntries.otherExternalCharges) +
-            convertToNumber(incomeStatementEntries.taxes) +
-            convertToNumber(incomeStatementEntries.financialCharges) +
-            convertToNumber(incomeStatementEntries.depreciationAndProvisions)
+        return +incomeStatementEntries.materialsAndSupplies +
+            incomeStatementEntries.externalServices +
+            incomeStatementEntries.otherExternalCharges +
+            incomeStatementEntries.taxes +
+            incomeStatementEntries.financialCharges +
+            incomeStatementEntries.depreciationAndProvisions
     }
 
-    incomeStatementEntries.totalOperatingIncome = formatToCurrency(getTotalOperatingIncome())
-    incomeStatementEntries.totalOperatingExpenses = formatToCurrency(getTotalOperatingExpenses())
-    incomeStatementEntries.currentResultBeforeTax = formatToCurrency(getTotalOperatingIncome() + getTotalOperatingExpenses())
-    incomeStatementEntries.taxOnProfits = (getTotalOperatingIncome() + getTotalOperatingExpenses()) > 0 ? formatToCurrency((getTotalOperatingIncome() + getTotalOperatingExpenses()) * .15) : "0,00 €"
-    incomeStatementEntries.netResult = formatToCurrency(getTotalOperatingIncome() + getTotalOperatingExpenses() - convertToNumber(incomeStatementEntries.taxOnProfits))
+    incomeStatementEntries.totalOperatingIncome = getTotalOperatingIncome()
+    incomeStatementEntries.totalOperatingExpenses = getTotalOperatingExpenses()
+    incomeStatementEntries.currentResultBeforeTax = getTotalOperatingIncome() + getTotalOperatingExpenses()
+    incomeStatementEntries.taxOnProfits = (getTotalOperatingIncome() + getTotalOperatingExpenses()) > 0 ? (getTotalOperatingIncome() + getTotalOperatingExpenses()) * .15 : 0.00
+    incomeStatementEntries.netResult = getTotalOperatingIncome() + getTotalOperatingExpenses() - incomeStatementEntries.taxOnProfits
 
     return incomeStatementEntries
 }

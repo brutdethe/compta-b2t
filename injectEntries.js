@@ -1,5 +1,13 @@
 import { findChartOfAccounts } from './generateEntries.js';
 
+function formatToCurrency(number) {
+    if (number) {
+        return number.toFixed(2).replace('.', ',') + ' €';
+    }
+
+    return ""
+}
+
 export function injectEntriesIntoTable(entries) {
     const tableBody = document.getElementById('journal-entries');
     entries.forEach(entry => {
@@ -8,8 +16,8 @@ export function injectEntriesIntoTable(entries) {
             <td>${entry.Date}</td>
             <td>${entry.Compte}</td>
             <td>${entry.Pièce}</td>
-            <td>${entry['Débit (€)']}</td>
-            <td>${entry['Crédit (€)']}</td>
+            <td>${formatToCurrency(entry['Débit (€)'])}</td>
+            <td>${formatToCurrency(entry['Crédit (€)'])}</td>
         `;
         tableBody.appendChild(row);
     });
@@ -37,8 +45,8 @@ export function injectLedgerEntries(ledgerEntries) {
                     <tr class="${entry.Libellé === 'Total' ? 'total' : entry.Libellé === 'Solde' ? 'solde' : ''}">
                         <td>${entry.Date}</td>
                         <td>${entry.Libellé}</td>
-                        <td>${entry['Débit (€)']}</td>
-                        <td>${entry['Crédit (€)']}</td>
+                        <td>${formatToCurrency(entry['Débit (€)'])}</td>
+                        <td>${formatToCurrency(entry['Crédit (€)'])}</td>
                     </tr>
                 `).join('')}
             </tbody>
@@ -57,23 +65,23 @@ export function injectIncomeStatementEntries(entries) {
             </tr>
             <tr>
                 <td>&nbsp;&nbsp;&nbsp;Cotisations des membres</td>
-                <td>${entries.contributions}</td>
+                <td>${formatToCurrency(entries.contributions)}</td>
             </tr>
             <tr>
                 <td>&nbsp;&nbsp;&nbsp;Dons</td>
-                <td>${entries.donations}</td>
+                <td>${formatToCurrency(entries.donations)}</td>
             </tr>
             <tr>
                 <td>&nbsp;&nbsp;&nbsp;Ventes de produits</td>
-                <td>${entries.productSales}</td>
+                <td>${formatToCurrency(entries.productSales)}</td>
             </tr>
             <tr>
                 <td>&nbsp;&nbsp;&nbsp;Prestations de services</td>
-                <td>${entries.serviceRevenue}</td>
+                <td>${formatToCurrency(entries.serviceRevenue)}</td>
             </tr>
             <tr class="total">
                 <td>Total des produits d'exploitation</td>
-                <td>${entries.totalOperatingIncome}</td>
+                <td>${formatToCurrency(entries.totalOperatingIncome)}</td>
             </tr>
             <tr>
                 <td>Charges d'exploitation</td>
@@ -81,43 +89,43 @@ export function injectIncomeStatementEntries(entries) {
             </tr>
             <tr>
                 <td>&nbsp;&nbsp;&nbsp;Achats consommés de matières et fournitures</td>
-                <td>${entries.materialsAndSupplies}</td>
+                <td>${formatToCurrency(entries.materialsAndSupplies)}</td>
             </tr>
             <tr>
                 <td>&nbsp;&nbsp;&nbsp;Services extérieurs</td>
-                <td>${entries.externalServices}</td>
+                <td>${formatToCurrency(entries.externalServices)}</td>
             </tr>
             <tr>
                 <td>&nbsp;&nbsp;&nbsp;Autres charges externes</td>
-                <td>${entries.otherExternalCharges}</td>
+                <td>${formatToCurrency(entries.otherExternalCharges)}</td>
             </tr>
             <tr>
                 <td>&nbsp;&nbsp;&nbsp;Impôts, taxes et versements assimilés</td>
-                <td>${entries.taxes}</td>
+                <td>${formatToCurrency(entries.taxes)}</td>
             </tr>
             <tr>
                 <td>&nbsp;&nbsp;&nbsp;Charges financières</td>
-                <td>${entries.financialCharges}</td>
+                <td>${formatToCurrency(entries.financialCharges)}</td>
             </tr>
             <tr>
                 <td>&nbsp;&nbsp;&nbsp;Dotations aux amortissements et provisions</td>
-                <td>${entries.depreciationAndProvisions}</td>
+                <td>${formatToCurrency(entries.depreciationAndProvisions)}</td>
             </tr>
             <tr class="total">
                 <td>Total des charges d'exploitation</td>
-                <td>${entries.totalOperatingExpenses}</td>
+                <td>${formatToCurrency(entries.totalOperatingExpenses)}</td>
             </tr>
             <tr class="total">
                 <td>Résultat courant avant impôts</td>
-                <td>${entries.currentResultBeforeTax}</td>
+                <td>${formatToCurrency(entries.currentResultBeforeTax)}</td>
             </tr>
             <tr>
                 <td>Impôt sur les bénéfices</td>
-                <td>${entries.taxOnProfits}</td>
+                <td>${formatToCurrency(entries.taxOnProfits)}</td>
             </tr>
             <tr class="total">
                 <td>Résultat net</td>
-                <td>${entries.netResult}</td>
+                <td>${formatToCurrency(entries.netResult)}</td>
             </tr>
         `;
 }
