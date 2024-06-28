@@ -38,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Gestion des liens de navigation d'année
             const yearLinks = document.querySelectorAll('.year-nav a');
-            console.log("yearLinks", yearLinks)
             const currentYear = localStorage.getItem('selectedYear') || '2024';
             yearLinks.forEach(link => {
                 if (link.getAttribute('data-year') === currentYear) {
@@ -48,31 +47,46 @@ document.addEventListener('DOMContentLoaded', () => {
                     event.preventDefault();
                     const selectedYear = event.target.getAttribute('data-year');
                     localStorage.setItem('selectedYear', selectedYear);
+                    loadCSV(selectedYear);
                     yearLinks.forEach(l => l.classList.remove('menu-selected'));
                     event.target.classList.add('menu-selected');
                 });
             });
+
+            loadCSV(currentYear);
         });
 });
 
-fetch('https://docs.google.com/spreadsheets/d/1ZW7B8LixvWIWpFwUEF9bsXldgZGINrgu7Q4fF4PJDHk/export?format=csv&pli=1&gid=1093092905#gid=1093092905')
-    .then(response => {
-        if (!response.ok) throw new Error('Network response was not ok');
-        return response.text();
-    })
-    .then(csvText => {
-        const jsonData = parseCSV(csvText);
-        const journalEntries = jsonData.flatMap(line => lineToEntry(line));
-        if (document.getElementById('journal-entries')) {
-            injectEntriesIntoTable(journalEntries);
-        }
-        if (document.getElementById('ledger-entries')) {
-            const ledgerEntries = generateLedger(journalEntries);
-            injectLedgerEntries(ledgerEntries);
-        }
-        if (document.getElementById('income-statement-entries')) {
-            const incomeStatementEntries = generateIncomeStatement(journalEntries);
-            injectIncomeStatementEntries(incomeStatementEntries);
-        }
-    })
-    .catch(error => console.error('There has been a problem with your fetch operation:', error));
+function loadCSV(year) {
+    const yearToGid = {
+        '2024': '1195572214',
+        '2023': '1699669836',
+        '2022': '970440530',
+        '2021': '1093092905',
+        '2020': '1414269037',
+        '2019': '284692874'
+    };
+    const csvUrl = `https://docs.google.com/spreadsheets/d/1ZW7B8LixvWIWpFwUEF9bsXldgZGINrgu7Q4fF4PJDHk/export?format=csv&pli=1&gid=${yearToGid[year]}#gid=${yearToGid[year]}`;
+
+    fetch(csvUrl)
+        .then(response => {
+            if (!response.ok) throw new Error('Network response was not ok');
+            return response.text();
+        })
+        .then(csvText => {
+            const jsonData = parseCSV(csvText);
+            const journalEntries = jsonData.flatMap(line => lineToEntry(line));
+            if (document.getElementById('journal-entries')) {
+                injectEntriesIntoTable(journalEntries);
+            }
+            if (document.getElementById('ledger-entries')) {
+                const ledgerEntries = generateLedger(journalEntries);
+                injectLedgerEntries(ledgerEntries);
+            }
+            if (document.getElementById('income-statement-entries')) {
+                const incomeStatementEntries = generateIncomeStatement(journalEntries);
+                injectIncomeStatementEntries(incomeStatementEntries);
+            }
+        })
+        .catch(error => console.error('There has been a problem with your fetch operation:', error));
+}

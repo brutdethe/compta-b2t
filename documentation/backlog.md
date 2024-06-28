@@ -10,13 +10,15 @@
 - [x] ajoute un style sur les titres du journal
 - [x] notice explicative pour chaque artefact
 - [x] collecter directement les données via le sheet
-- [ ] proposer chaque année
+- [x] navigation : insérer dans chaque page
+- [x] proposer chaque année
+- [ ] classer les écritures par date
+- [ ] reprendre les comptes dans les sheets (plus humain)
 - [ ] reprendre les labels pour le grand livre
 - [ ] notice avec exemples de toutes les écritures générées
 - [ ] immobilisations machine
 - [ ] stripe écritures
 - [ ] litige
-- [ ] navigation : insérer dans chaque page
 
 ## US5 Construire le bilan
 - [x] créer une page modèle statique
@@ -29,3 +31,7 @@
 
 - [ ] gestion des a-nouveaux
 - [ ] vérifier avec une comptable
+- [ ] vérifier que les pointage bancaire ne correspondent pas à des dépenses Yalin ou Stéphane mais bien à B2T
+- [ ] wise 2024
+- [ ] importer directement les écritures wise
+- [ ] optimiser le chargement des écritures (?)
