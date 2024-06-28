@@ -89,7 +89,13 @@ function loadCSV(year) {
         })
         .then(csvText => {
             const jsonData = parseCSV(csvText);
-            const journalEntries = jsonData.flatMap(line => lineToEntry(line));
+            const journalEntries = jsonData.flatMap(line => lineToEntry(line))
+                .sort((a, b) => {
+                    const dateA = new Date(a.Date.split('/').reverse().join('-'));
+                    const dateB = new Date(b.Date.split('/').reverse().join('-'));
+                    return dateA - dateB;
+                });
+
             if (document.getElementById('journal-entries')) {
                 injectEntriesIntoTable(journalEntries);
             }

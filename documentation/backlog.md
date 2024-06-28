@@ -15,7 +15,7 @@
 - [x] loader pour une nouvelle année
 - [x] afficher une erreur pour les écritures non-rendues
 - [x] favicon, no-index, no-follow
-- [ ] classer les écritures par date
+- [x] classer les écritures par date
 - [ ] reprendre les comptes dans les sheets (plus humain)
 - [ ] reprendre les labels pour le grand livre
 - [ ] notice avec exemples de toutes les écritures générées
