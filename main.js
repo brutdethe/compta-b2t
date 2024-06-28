@@ -57,6 +57,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 });
 
+function showLoader() {
+    document.getElementById('loader').style.display = 'block';
+}
+
+function hideLoader() {
+    document.getElementById('loader').style.display = 'none';
+}
+
 function loadCSV(year) {
     const yearToGid = {
         '2024': '1195572214',
@@ -67,7 +75,7 @@ function loadCSV(year) {
         '2019': '284692874'
     };
     const csvUrl = `https://docs.google.com/spreadsheets/d/1ZW7B8LixvWIWpFwUEF9bsXldgZGINrgu7Q4fF4PJDHk/export?format=csv&pli=1&gid=${yearToGid[year]}#gid=${yearToGid[year]}`;
-
+    showLoader();
     fetch(csvUrl)
         .then(response => {
             if (!response.ok) throw new Error('Network response was not ok');
@@ -87,6 +95,10 @@ function loadCSV(year) {
                 const incomeStatementEntries = generateIncomeStatement(journalEntries);
                 injectIncomeStatementEntries(incomeStatementEntries);
             }
+            hideLoader();
         })
-        .catch(error => console.error('There has been a problem with your fetch operation:', error));
+        .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
+            hideLoader();
+        });
 }
