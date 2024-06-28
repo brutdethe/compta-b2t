@@ -39,7 +39,8 @@ nav ul li a:hover {
     background: #bbb;
 }
 
-.menu-selected a {
+.menu-selected a,
+.menu-selected {
     background: #666;
     color: #eee;
 }

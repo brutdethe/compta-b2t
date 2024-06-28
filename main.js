@@ -2,6 +2,7 @@ import { parseCSV } from './parseCSV.js';
 import { lineToEntry, generateLedger, generateIncomeStatement } from './generateEntries.js';
 import { injectEntriesIntoTable, injectLedgerEntries, injectIncomeStatementEntries } from './injectEntries.js';
 
+
 document.addEventListener('DOMContentLoaded', () => {
     const infoBtn = document.getElementById('infoBtn');
     const infoModal = document.getElementById('infoModal');
@@ -20,6 +21,38 @@ document.addEventListener('DOMContentLoaded', () => {
             infoModal.style.display = 'none';
         }
     });
+
+    fetch('nav.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navigation').innerHTML = data;
+
+            // Gestion des liens de navigation de page
+            const pageLinks = document.querySelectorAll('nav ul:first-of-type li a');
+            const currentPage = location.pathname.split('/').pop();
+            pageLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.parentElement.classList.add('menu-selected');
+                }
+            });
+
+            // Gestion des liens de navigation d'année
+            const yearLinks = document.querySelectorAll('.year-nav a');
+            console.log("yearLinks", yearLinks)
+            const currentYear = localStorage.getItem('selectedYear') || '2024';
+            yearLinks.forEach(link => {
+                if (link.getAttribute('data-year') === currentYear) {
+                    link.classList.add('menu-selected');
+                }
+                link.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const selectedYear = event.target.getAttribute('data-year');
+                    localStorage.setItem('selectedYear', selectedYear);
+                    yearLinks.forEach(l => l.classList.remove('menu-selected'));
+                    event.target.classList.add('menu-selected');
+                });
+            });
+        });
 });
 
 fetch('https://docs.google.com/spreadsheets/d/1ZW7B8LixvWIWpFwUEF9bsXldgZGINrgu7Q4fF4PJDHk/export?format=csv&pli=1&gid=1093092905#gid=1093092905')
