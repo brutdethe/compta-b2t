@@ -65,6 +65,11 @@ function hideLoader() {
     document.getElementById('loader').style.display = 'none';
 }
 
+function hideErrorMessage() {
+    const errorMessageElement = document.getElementById('error-message');
+    errorMessageElement.style.display = 'none';
+}
+
 function loadCSV(year) {
     const yearToGid = {
         '2024': '1195572214',
@@ -75,6 +80,7 @@ function loadCSV(year) {
         '2019': '284692874'
     };
     const csvUrl = `https://docs.google.com/spreadsheets/d/1ZW7B8LixvWIWpFwUEF9bsXldgZGINrgu7Q4fF4PJDHk/export?format=csv&pli=1&gid=${yearToGid[year]}#gid=${yearToGid[year]}`;
+    hideErrorMessage();
     showLoader();
     fetch(csvUrl)
         .then(response => {

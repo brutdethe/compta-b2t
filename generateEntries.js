@@ -1,3 +1,9 @@
+function displayErrorMessage(message) {
+    const errorMessageElement = document.getElementById('error-message');
+    errorMessageElement.textContent = message;
+    errorMessageElement.style.display = 'block';
+}
+
 export function findChartOfAccounts({ account, label }) {
     const chartOfAccounts = {
         "275000": ["dépôts et cautionnements versés"],
@@ -89,11 +95,16 @@ function saleEntry(line) {
 
 export function lineToEntry(line) {
     const accountNumber = findChartOfAccounts({ label: line.poste }).account;
-    if (accountNumber.startsWith('4')) return refundEntry(line);
-    if (accountNumber.startsWith('6')) return line['qui paye ?'] === 'B2T' ? chargeB2TEntry(line) : chargePersonEntry(line);
-    if (accountNumber.startsWith('7')) return saleEntry(line);
+    try {
+        if (accountNumber.startsWith('4')) return refundEntry(line);
+        if (accountNumber.startsWith('6')) return line['qui paye ?'] === 'B2T' ? chargeB2TEntry(line) : chargePersonEntry(line);
+        if (accountNumber.startsWith('7')) return saleEntry(line);
 
-    throw new Error(`L'écriture ${JSON.stringify(line)} n'a pu être rendue !`);
+        throw new Error(`L'écriture ${JSON.stringify(line)} n'a pu être rendue !`);
+    } catch (error) {
+        displayErrorMessage(`Erreur : L'écriture ${JSON.stringify(line)} n'a pu être rendue. Veuillez vérifier les données et réessayer.`);
+        throw error;
+    }
 }
 
 export function generateLedger(journalEntries) {

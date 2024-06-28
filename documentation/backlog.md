@@ -12,6 +12,9 @@
 - [x] collecter directement les données via le sheet
 - [x] navigation : insérer dans chaque page
 - [x] proposer chaque année
+- [x] loader pour une nouvelle année
+- [x] afficher une erreur pour les écritures non-rendues
+- [ ] favicon, no-index, no-follow
 - [ ] classer les écritures par date
 - [ ] reprendre les comptes dans les sheets (plus humain)
 - [ ] reprendre les labels pour le grand livre
