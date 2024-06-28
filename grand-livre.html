@@ -17,9 +17,25 @@
       <li><a href="bilan.html">Bilan</a></li>
     </ul>
   </nav>
-  <div class="ledger" id="ledger-entries">
-    <h1>Grand Livre</h1>
-    <!-- Les entrées du journal seront insérées ici -->
+  <div class="ledger">
+    <h1>Grand Livre<button id="infoBtn">ℹ️</button></h1>
+    <div id="ledger-entries">
+      <!-- Les entrées du journal seront insérées ici -->
+    </div>
+  </div>
+  <div id="infoModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Notice Explicative - Grand Livre</h2>
+      <p>Le grand livre est un document comptable qui reprend, compte par compte, toutes les opérations enregistrées dans le journal général. Chaque compte présente les mouvements au débit et au crédit, et permet de connaître le solde de chaque compte à une date donnée.</p>
+      <h3>Rubriques :</h3>
+      <ul>
+        <li><strong>Date :</strong> La date de l'opération comptable.</li>
+        <li><strong>Libellé :</strong> Une description succincte de l'opération.</li>
+        <li><strong>Débit :</strong> Montant inscrit au débit du compte.</li>
+        <li><strong>Crédit :</strong> Montant inscrit au crédit du compte.</li>
+      </ul>
+    </div>
   </div>
 </body>
 </html>

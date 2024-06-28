@@ -18,7 +18,7 @@
     </ul>
   </nav>
   <div class="journal">
-    <h1>Journal Général</h1>
+    <h1>Journal Général<button id="infoBtn">ℹ️</button></h1>
     <table>
       <thead>
         <tr>
@@ -33,6 +33,21 @@
           <!-- Les entrées du journal seront insérées ici -->
       </tbody>
     </table>
+  </div>
+  <div id="infoModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Notice Explicative - Journal Général</h2>
+      <p>Le journal général est un document comptable qui enregistre de manière chronologique toutes les opérations financières de l'entreprise. Chaque entrée dans le journal est appelée une écriture et comprend plusieurs éléments :</p>
+      <h3>Rubriques :</h3>
+      <ul>
+        <li><strong>Date :</strong> La date à laquelle l'opération a été réalisée.</li>
+        <li><strong>Compte :</strong> Le numéro de compte correspondant à l'opération. Les comptes sont souvent définis par un plan comptable spécifique à l'entreprise.</li>
+        <li><strong>Pièce :</strong> Référence à un document justificatif de l'opération (par exemple, une facture, un reçu, un bon de commande).</li>
+        <li><strong>Débit :</strong> Montant de l'opération inscrit au débit du compte.</li>
+        <li><strong>Crédit :</strong> Montant de l'opération inscrit au crédit du compte.</li>
+      </ul>
+    </div>
   </div>
 </body>
 </html>

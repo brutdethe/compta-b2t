@@ -10,6 +10,7 @@
 - [x] ajoute un style sur les titres du journal
 - [x] notice explicative pour chaque artefact
 - [x] collecter directement les données via le sheet
+- [ ] proposer chaque année
 - [ ] reprendre les labels pour le grand livre
 - [ ] notice avec exemples de toutes les écritures générées
 - [ ] immobilisations machine
